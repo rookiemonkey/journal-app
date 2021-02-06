@@ -22,7 +22,7 @@ class CategoryControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "4. should delete a category" do
+  test "5. should delete a category" do
     delete categories_delete_path 1
     assert_response :success
   end
