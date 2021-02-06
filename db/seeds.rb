@@ -7,5 +7,6 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 5.times do |i|
-  Category.create(name: "Category #{i}")
+  Category.create(  name: "Category #{i}", 
+                    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam risus, lacinia et luctus id, port")
 end

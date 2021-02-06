@@ -1,0 +1,48 @@
+.tile-container {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.tile-item {
+  cursor: pointer;
+  min-height: 250px !important;
+}
+
+.tile-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.action-tile-button {
+  background-color: transparent !important;
+}
+
+.action-tile-button:focus {
+  box-shadow: none !important;
+}
+
+.notification {
+  padding: 1.25rem !important;
+}
+
+.is-shady {
+  animation: flyintoright .4s backwards;
+  background: #fff;
+  box-shadow: rgba(0, 0, 0, .1) 0 1px 0;
+  border-radius: 4px;
+  display: inline-block;
+  margin: 10px;
+  position: relative;
+  transition: all .2s ease-in-out;
+}
+
+.is-shady:hover {
+  box-shadow: 0 10px 16px rgba(0, 0, 0, .13), 
+              0 6px 6px rgba(0, 0, 0, .19);
+}
+
+.is-child {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: space-between;
+}

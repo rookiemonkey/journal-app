@@ -1,18 +1,39 @@
 <%= render 'components/navigation' %>
 
-<h1>CATEGORY INDEX</h1>
-
-<ul>
+<section class="container mt-6">
+<div class="tile tile-container is-ancestor">
 
   <% @categories.each do |category| %>
+    <div class="tile tile-item is-parent is-shady">
+    <article class="tile is-child notification is-white">
+    
+        <div class="tile-contents">
+          <h3 class="title is-size-4">
+            <%= category.name %>
+          </h3>
 
-    <li>
-      <%= category.name %>
-      <%= link_to 'Show', categories_show_path(category) %>
-      <%= link_to 'Edit', categories_edit_path(category) %>
-      <%= link_to 'Delete', categories_delete_path(category), method: :delete, data: { confirm: 'Are you sure?' } %>
-    </li>
+          <p class="subtitle is-size-6">
+            <%= category.description %>
+          </p>
+        </div>
 
+        <div class="tile-actions">
+          <%= link_to categories_show_path(category), class: :"button is-light action-tile-button", title: "View Category" do %>
+              <i class="fas fa-book-reader"></i>
+          <% end %>
+
+          <%= link_to categories_edit_path(category), class: :"button is-warning is-light action-tile-button", title: "Edit Category" do %>
+              <i class="fas fa-edit"></i>
+          <% end %>
+
+          <%= link_to categories_delete_path(category), method: :delete, class: :"button is-danger is-light action-tile-button", title: "Delete Category", data: { confirm: "Are you sure you want to delete #{category.name}?" } do %>
+              <i class="far fa-trash-alt"></i>
+          <% end %>
+        </div>
+
+    </article>
+    </div>
   <% end %>
 
-</ul>
+</div>
+</section>
