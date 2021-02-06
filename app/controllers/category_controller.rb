@@ -2,7 +2,7 @@ require "pp"
 
 class CategoryController < ApplicationController
 
-  before_action :set_category, only: [:show]
+  before_action :set_category, only: [:show, :delete]
 
   def index
     @categories = Category.all
@@ -24,6 +24,8 @@ class CategoryController < ApplicationController
   end
 
   def delete
+    @category.destroy
+    redirect_to categories_path
   end
 
 
