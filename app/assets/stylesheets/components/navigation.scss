@@ -1,20 +1,19 @@
-.banner-custom {
-  background-image: url('banner.jpg');
-  background-position: bottom;
-  background-color: rgba(0,0,0,0.5) !important;
-  background-blend-mode: overlay;
-}
-
-.title {
-  display: flex;
-  align-items: center;
-}
-
 .title-icon {
   width: 30px;
   height: 30px;
 }
 
-.subtitle {
-  opacity: 0.75;
+.title-custom {
+  display: flex;
+  justify-content: space-between;
+}
+
+.content h1 {
+  margin-bottom: 0px !important;
+}
+
+.title-brand {
+  margin-bottom: 0px !important;
+  display: flex;
+  align-items: center;
 }

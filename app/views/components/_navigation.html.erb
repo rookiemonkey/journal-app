@@ -1,17 +1,18 @@
-<section class="hero is-primary banner-custom">
+<section class="hero banner-custom">
 <div class="hero-body">
 <div class="columns">
 <div class="column is-12">
 <div class="container content">
 
-  <h1 class="title">
-    <%= image_tag asset_path('brand.svg'), class: "title-icon mr-3" %>
-    Journal App
+  <h1 class="title title-custom has-text-primary-light">
+    <span class="title title-brand has-text-primary-light">
+        <%= image_tag asset_path('brand.svg'), class: "title-icon mr-3" %>
+        Journal App
+    </span>
+    <span>
+      <i class="far fa-calendar-alt"></i> <%= date_full_words Time.now %>
+    </span>
   </h1>
-
-  <h3 class="subtitle has-text-light">
-    Never miss any moment
-  </h3>
 
 </div>
 </div>
