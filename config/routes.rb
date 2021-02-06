@@ -1,3 +1,8 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+  get '/categories', to: 'category#index', as: 'categories'
+  delete '/categories/:id', to: 'category#delete', as: 'categories_delete'
+  get '/categories/:id/edit', to: 'category#edit', as: 'categories_edit'
+  get '/categories/new', to: 'category#new', as: 'categories_new'
+
 end
