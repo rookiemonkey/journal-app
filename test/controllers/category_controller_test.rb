@@ -1,4 +1,5 @@
 require "test_helper"
+require "pp"
 
 class CategoryControllerTest < ActionDispatch::IntegrationTest
 
@@ -22,7 +23,7 @@ class CategoryControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "4. should get show" do
-    get categories_show_path 1
+    get categories_show_path(@category)
     assert_response :success
   end
 
@@ -48,6 +49,11 @@ class CategoryControllerTest < ActionDispatch::IntegrationTest
 
   test "9. index should show the category name" do
     get categories_path
+    assert_match @category.name, response.body
+  end
+
+  test "10. show should show the category name" do
+    get categories_show_path(@category)
     assert_match @category.name, response.body
   end
 
