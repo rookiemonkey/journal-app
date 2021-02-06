@@ -17,6 +17,12 @@ class CategoryController < ApplicationController
   def show
   end
 
+  def create
+    @category = Category.create(self.extract_params)
+    render :new unless @category.valid?
+    redirect_to categories_show_path(@category) if @category.valid?
+  end
+
   def delete
   end
 
@@ -25,6 +31,10 @@ class CategoryController < ApplicationController
 
   def set_category
     @category = Category.find params[:id]
+  end
+
+  def extract_params
+    params.require(:category).permit(:name)
   end
 
 end

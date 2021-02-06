@@ -52,9 +52,38 @@ class CategoryControllerTest < ActionDispatch::IntegrationTest
     assert_match @category.name, response.body
   end
 
-  test "10. show should show the category name" do
+  test "10. index should have a categories instance variable" do
+    get categories_path
+    assert_not_nil assigns(:categories)
+  end
+
+  test "11. show should show the category name" do
     get categories_show_path(@category)
     assert_match @category.name, response.body
+  end
+
+  test "12. show should have a category instance variable" do
+    get categories_show_path(@category)
+    assert_not_nil assigns(:category)
+  end
+
+  test "13. should be able to create a category" do
+
+    assert_difference('Category.count', 1) do
+      post categories_new_path, params: { category: { name: 'Category One' } } 
+    end
+
+    follow_redirect!
+    assert_not_nil assigns(:category)
+  end
+
+  test "15. should be able to reject a category if name is empty" do
+
+    assert_no_difference('Category.count') do
+      post categories_new_path, params: { category: { name: '' } } 
+    end
+
+    assert_select "input:match('name', ?)", 'name'
   end
 
 end

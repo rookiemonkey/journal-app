@@ -1,1 +1,5 @@
 <h1>CATEGORY NEW FORM</h1>
+
+<%= form_with scope: :category do |f| %>
+    <%= render 'category/form_fields', form: f %>
+<% end %>
