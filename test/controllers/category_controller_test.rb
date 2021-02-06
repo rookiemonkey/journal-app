@@ -17,6 +17,11 @@ class CategoryControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "4. should show a category" do
+    get categories_show_path 1
+    assert_response :success
+  end
+
   test "4. should delete a category" do
     delete categories_delete_path 1
     assert_response :success

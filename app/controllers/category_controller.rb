@@ -9,6 +9,9 @@ class CategoryController < ApplicationController
   def edit
   end
 
+  def show
+  end
+
   def delete
   end
 
