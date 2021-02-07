@@ -1,8 +1,8 @@
 class ApplicationController < ActionController::Base
 
   include Exceptions::JournalErrors
-  rescue_from CreateError, with: :create_journal_error
-  rescue_from UpdateError, with: :update_journal_error
+  rescue_from CreateJournalError, with: :create_journal_error
+  rescue_from UpdateJournalError, with: :update_journal_error
 
 
   protected
