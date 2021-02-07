@@ -1,0 +1,17 @@
+<% if instance.present? and instance.errors.present? %>
+
+<section class="hero is-small is-danger container-errors mb-3">
+<div class="hero-body">
+
+
+    <ul>
+        <% parse_errors(instance.errors).each do |field, error| %>
+            <li><b><%= field %></b> <%= error %></li>
+        <% end %>
+    </ul>
+
+
+</div>
+</section>
+
+<% end %>

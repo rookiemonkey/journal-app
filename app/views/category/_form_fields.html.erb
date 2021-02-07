@@ -2,7 +2,7 @@
 <div class="field">
 <div class="control has-icons-left has-icons-right">
 
-  <%= form.text_field :name, placeholder: "Journal Name", class: "input is-medium is-info", maxlength: 20%>
+  <%= form.text_field :name, placeholder: "Journal Name", class: "input is-medium is-info", maxlength: 20, autocomplete: 'off' %>
   <span class="icon is-left">
     <i class="fas fa-book-open"></i>
   </span>
@@ -18,7 +18,7 @@
 <div class="field">
 <div class="control">
 
-    <%= form.text_area :description, placeholder: "Journal Description", class: "textarea is-info has-fixed-size", maxlength: 100, minlength: 10 %>
+    <%= form.text_area :description, placeholder: "Journal Description", class: "textarea is-info has-fixed-size", maxlength: 100, minlength: 10, autocomplete: 'off' %>
 
 </div>
 </div>

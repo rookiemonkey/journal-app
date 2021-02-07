@@ -19,7 +19,7 @@ class CategoryController < ApplicationController
 
   def create
     @category = Category.create(self.extract_params)
-    render :new unless @category.valid?
+    raise 'Failed to create journal' unless @category.valid?
     redirect_to categories_show_path(@category) if @category.valid?
   end
 
@@ -27,6 +27,7 @@ class CategoryController < ApplicationController
     @category.destroy
     redirect_to categories_path
   end
+
 
 
   private

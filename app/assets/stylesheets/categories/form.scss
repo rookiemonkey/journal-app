@@ -5,8 +5,13 @@
   align-items: center;
 }
 
+.container-right {
+  flex-direction: column;
+}
+
 .container-left img,
-.container-right form {
+.container-right form,
+.container-right .container-errors  {
   width: 75%;
   height: auto;
 }
