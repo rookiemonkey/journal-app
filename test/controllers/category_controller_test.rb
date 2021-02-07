@@ -21,7 +21,7 @@ class CategoryControllerTest < ActionDispatch::IntegrationTest
 
 
   test "3. should get edit" do
-    get categories_edit_path 1
+    get categories_edit_path @category
     assert_response :success
   end
 
