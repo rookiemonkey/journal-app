@@ -1,0 +1,12 @@
+.container-left,
+.container-right {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
+
+.container-left img,
+.container-right form {
+  width: 75%;
+  height: auto;
+}

@@ -1,6 +1,12 @@
 <%= render 'components/navigation' %>
 
-<section class="container mt-6">
+<section class="container">
+  <%= link_to categories_new_path, class: "button is-light" do %>
+    <i class="fas fa-plus mr-3"></i> Add Journal
+  <% end %>
+</section>
+
+<section class="container container-content mt-6">
 <div class="tile tile-container is-ancestor">
 
   <% @categories.each do |category| %>
