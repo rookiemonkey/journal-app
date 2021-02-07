@@ -3,7 +3,7 @@ require "test_helper"
 class CategoryTest < ActiveSupport::TestCase
   
   def setup
-    @category = Category.new(name: "Category One", description: ('a'*20))
+    @category = Category.create(name: "Category One", description: ('a'*20))
   end
 
   test "1. should reject a category without a name" do

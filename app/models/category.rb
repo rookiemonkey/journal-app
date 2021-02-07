@@ -1,7 +1,6 @@
 class Category < ApplicationRecord
 
-  has_many :category_tasks
-  has_many :tasks, through: :category_tasks
+  has_many :tasks, dependent: :destroy
 
   validates :name,
             presence: true,

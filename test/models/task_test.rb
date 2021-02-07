@@ -4,7 +4,7 @@ require "pp"
 class TaskTest < ActiveSupport::TestCase
 
   def setup
-    @task = Task.new(name: "Task One")
+    @task = Task.create(name: "Task One")
   end
 
   test "1. task should reject empty name" do
