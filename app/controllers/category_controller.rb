@@ -2,7 +2,7 @@ require "pp"
 
 class CategoryController < ApplicationController
 
-  before_action :set_category, only: [:show, :delete]
+  before_action :set_category, only: [:show, :delete, :edit, :update]
 
   def index
     @categories = Category.all
@@ -20,7 +20,18 @@ class CategoryController < ApplicationController
   def create
     @category = Category.create(self.extract_params)
     raise 'Failed to create journal' unless @category.valid?
-    redirect_to categories_show_path(@category) if @category.valid?
+    redirect_to(categories_show_path(@category), notice: 'Successfully created your journal')
+  end
+
+  def update
+    @category.update(self.extract_params)
+
+    unless @category.valid?
+      flash.now[:alert] = 'Failed to update journal'
+      return render :edit
+    end
+
+    redirect_to(categories_show_path(@category), notice: 'Successfully updated your journal')
   end
 
   def delete

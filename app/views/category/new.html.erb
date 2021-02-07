@@ -13,7 +13,7 @@
     <%= render 'components/form_errors', instance: @category  %>
 
     <%= form_with scope: :category do |f| %>
-        <%= render 'category/form_fields', form: f %>
+        <%= render 'category/form_fields', form: f, action: 'Create' %>
     <% end %>
 
   </div>

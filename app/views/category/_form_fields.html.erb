@@ -33,7 +33,9 @@
   <% end %>
 
   <%= form.button class: "button is-info" do %>
-    <i class="fas fa-plus mr-3"></i> Create Journal
+    <%= raw '<i class="fas fa-plus mr-3"></i>' if action == 'Create' %>
+    <%= raw '<i class="fas fa-edit mr-3"></i>' if action == 'Update' %>
+    <%= action %> Journal
   <% end %>
 
 </div>
