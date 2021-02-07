@@ -69,9 +69,10 @@ class CategoryControllerTest < ActionDispatch::IntegrationTest
   end
 
 
-  test "11. show should show the category name" do
+  test "11. show should show the category name and description" do
     get categories_show_path(@category)
     assert_match @category.name, response.body
+    assert_match @category.description, response.body
   end
 
 
@@ -105,6 +106,7 @@ class CategoryControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_select "input:match('name', ?)", 'name'
+    assert_match 'Failed', response.body
   end
 
 
@@ -118,6 +120,12 @@ class CategoryControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_select "input:match('name', ?)", 'name'
+    assert_match 'Failed', response.body
+  end
+
+  test "16. show should redirect to category index a category doesn't exist" do
+    get categories_show_path(9999)
+    assert_redirected_to categories_path
   end
 
 end
