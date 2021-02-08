@@ -31,22 +31,25 @@ end
 # TASKS CREATION
 # NOTE: did not include jan & feb since its already pastdated
 
-year = ['2021', '2022']
-month = ['03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
+month = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
 day = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
 
 Category.all.each do |category|
+  now = Time.now
+
+  # 10 task that has random deadline in the future
   10.times do |i|
-    deadline = ''
-    deadline << year.sample
-    deadline << "-#{month.sample}"
-    deadline << "-#{day.sample}"
-
-    task = Task.new(name: "#{category.name} #{i+1}",
+    Task.create(name: "#{category.name} #{i+1}",
                     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam risus, lacinia et luctus id, port",
-                    deadline: deadline)
-
-    task.category_id = category.id
-    task.save
+                    deadline: "#{now.year+1}-#{month.sample}-#{day.sample}",
+                    category_id: category.id)
   end
+
+
+
+  # have at least one task that is due today
+  Task.create(name: "#{category.name} 11",
+              description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam risus, lacinia et luctus id, port",
+              deadline: "#{now.year}-#{now.month}-#{now.day}",
+              category_id: category.id)
 end
