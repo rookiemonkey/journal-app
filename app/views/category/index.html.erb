@@ -1,8 +1,11 @@
 <%= render 'components/navigation' %>
 
-<section class="container">
-  <%= link_to categories_new_path, class: "button is-light" do %>
+<section class="container is-flex is-justify-content-flex-end">
+  <%= link_to categories_new_path, class: "button is-light ml-1" do %>
     <i class="fas fa-plus mr-3"></i> Journal
+  <% end %>
+  <%= link_to categories_new_task_path, class: "button is-light ml-1" do %>
+    <i class="fas fa-plus mr-3"></i> Task
   <% end %>
 </section>
 

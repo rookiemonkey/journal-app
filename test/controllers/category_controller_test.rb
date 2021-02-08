@@ -72,8 +72,7 @@ class CategoryControllerTest < ActionDispatch::IntegrationTest
       } } 
     end
 
-    follow_redirect!
-    assert_not_nil assigns(:category)
+    assert_redirected_to categories_path
   end
 
 
@@ -111,6 +110,7 @@ class CategoryControllerTest < ActionDispatch::IntegrationTest
     }
     
     assert Category.find(@category.id).name == 'UPDATED CATEGORY!'
+    assert_redirected_to categories_path
   end
 
 
@@ -120,6 +120,13 @@ class CategoryControllerTest < ActionDispatch::IntegrationTest
     }
     
     assert Category.find(@category.id).description == 'UPDATED DESCRIPTION!'
+    assert_redirected_to categories_path
+  end
+
+
+  test "19. category new_task should show a form" do
+    get categories_new_task_path
+    assert_response :success
   end
 
 end

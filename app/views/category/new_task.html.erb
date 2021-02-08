@@ -1,0 +1,31 @@
+<%= render 'components/navigation' %>
+
+<section class="container container-content mt-6">
+<div class="columns">
+
+  <div class="column is-6 container-left">
+    <%= image_tag :'create.task.svg'  %>
+  </div>
+
+  <div class="column is-6 container-right">
+
+    <%= render 'components/form_errors', instance: @task  %>
+
+    <%= form_with scope: :task, url: categories_create_task_path, method: :post do |f| %>
+        
+        <div class="field">
+        <div class="control select is-info is-medium" style="width: 100%">
+          <%= collection_select :task, :category_id, Category.all, :id, :name, { include_blank: 'Add to Journal' }, { class: "input" } %>
+        </div>
+        </div>
+
+        <%= render 'task/form_fields', form: f, action: "Create" %>
+        
+    <% end %>
+
+  </div>
+
+</div>
+</section>
+
+<%= render 'components/footer' %>
