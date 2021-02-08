@@ -15,18 +15,18 @@ class CategoryController < ApplicationController
   def create
     @category = Category.create(self.extract_params)
     raise CreateJournalError.new('Failed to create journal') unless @category.valid?
-    redirect_to(tasks_path(@category), notice: 'Successfully created your journal')
+    redirect_to(categories_path, notice: 'Successfully created your journal')
   end
 
   def update
     @category.update(self.extract_params)
     raise UpdateJournalError.new('Failed to update journal') unless @category.valid?
-    redirect_to(tasks_path(@category), notice: 'Successfully updated your journal')
+    redirect_to(categories_path, notice: 'Successfully updated your journal')
   end
 
   def delete
     @category.destroy
-    redirect_to categories_path
+    redirect_to(categories_path, notice: 'Successfully deleted your journal')
   end
 
 
