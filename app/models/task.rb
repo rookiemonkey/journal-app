@@ -22,6 +22,7 @@ class Task < ApplicationRecord
   # https://api.rubyonrails.org/v6.1.0/classes/ActiveSupport/TimeWithZone.html
   def deadline_not_past
     return if deadline.nil?
+    return if deadline.today?
     errors.add(:deadline, "is past") if deadline.past?
   end
 

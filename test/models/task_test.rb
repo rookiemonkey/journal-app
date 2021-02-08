@@ -47,4 +47,14 @@ class TaskTest < ActiveSupport::TestCase
     assert_not @task.valid?
   end
 
+  test "9. task should accept dated deadline today" do
+    time_now = Time.now
+    deadline = ''
+    deadline << time_now.year
+    deadline << "-#{time_now.month}"
+    deadline << "-#{time_now.day}"
+    @task.deadline = deadline
+    assert_not @task.valid?
+  end
+
 end
