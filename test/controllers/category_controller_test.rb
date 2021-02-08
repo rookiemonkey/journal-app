@@ -128,4 +128,20 @@ class CategoryControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to categories_path
   end
 
+  test "17. edit should be able to update a category name" do
+    patch categories_update_path(@category), params: {
+      category: { name: 'UPDATED CATEGORY!' }
+    }
+    
+    assert Category.find(@category.id).name == 'UPDATED CATEGORY!'
+  end
+
+  test "18. edit should be able to update a category description" do
+    patch categories_update_path(@category), params: {
+      category: { description: 'UPDATED DESCRIPTION!' }
+    }
+    
+    assert Category.find(@category.id).description == 'UPDATED DESCRIPTION!'
+  end
+
 end
