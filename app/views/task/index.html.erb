@@ -1,7 +1,11 @@
 <%= render 'components/navigation' %>
 
-<section class="container container-content mt-6">
-  <h1>ALL TASKS of a CATEGORY</h1>
+<section class="container container-content is-flex is-justify-content-space-between is-align-content-cente">
+  <h2 class="has-text-white is-size-4"><%= @category.name %></h2>
+
+  <%= link_to tasks_new_path, class: "button is-light" do %>
+    <i class="fas fa-plus mr-3"></i> Add Task
+  <% end %>
 </section>
 
 <%= render 'components/footer' %>
