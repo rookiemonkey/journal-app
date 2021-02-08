@@ -1,9 +1,7 @@
-require 'pp'
-
 class TaskController < ApplicationController
 
   before_action :set_category, only: [:index, :create]
-  before_action :set_task, only: [:edit, :delete, :update]
+  before_action :set_task, only: [:edit, :delete, :update, :show]
 
   def index
   end
@@ -14,12 +12,13 @@ class TaskController < ApplicationController
   def edit
   end
 
+  def show
+  end
+
   def create
     @task = Task.new(self.extract_params)
     @task.category_id = @category.id
     @task.save
-    @category.tasks << @task
-    @category.save
   end
 
   def update
