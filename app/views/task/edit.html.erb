@@ -1,5 +1,14 @@
-<%= form_with model: @task, url: tasks_update_path, method: :patch, local: true do |f| %>
-  <%= f.text_field :name, autocomplete: :off %>
-  <%= f.text_area :description, autocomplete: :off %>
-  <%= f.date_field :deadline %>
-<% end %>
+<%= render 'components/navigation' %>
+
+<section class="container container-content mt-6">
+  <h1>EDITING A TASK</h1>
+
+  <%= form_with model: @task, url: tasks_update_path, method: :patch, local: true do |f| %>
+    <%= f.text_field :name, autocomplete: :off %>
+    <%= f.text_area :description, autocomplete: :off %>
+    <%= f.date_field :deadline %>
+  <% end %>
+
+</section>
+
+<%= render 'components/footer' %>
