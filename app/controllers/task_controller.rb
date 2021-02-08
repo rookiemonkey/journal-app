@@ -1,6 +1,6 @@
 class TaskController < ApplicationController
 
-  before_action :set_category, only: [:index, :create, :delete, :update]
+  before_action :set_category, only: [:index, :create, :delete, :update, :edit]
   before_action :set_task, only: [:edit, :delete, :update, :show]
 
   def index
@@ -16,12 +16,12 @@ class TaskController < ApplicationController
     @task = Task.new(self.extract_params)
     @task.category_id = @category.id
     raise CreateTaskError.new('Failed to create task') unless @task.save
-    redirect_to(tasks_path(@task.category_id), notice: "Successfully created a task for #{@category.name}")
+    redirect_to(tasks_path(@category.id), notice: "Successfully created a task for #{@category.name}")
   end
 
   def update
     raise UpdateTaskError.new('Failed to update task') unless @task.update(self.extract_params)
-    redirect_to(tasks_path(@task.category_id), notice: "Successfully updated a task for #{@category.name}")
+    redirect_to(tasks_path(@category.id), notice: "Successfully updated a task for #{@category.name}")
   end
 
   def delete
@@ -34,6 +34,7 @@ class TaskController < ApplicationController
 
   def set_category
     @category = Category.find params[:id]
+    raise ActiveRecord::RecordNotFound unless @category.id == params[:id].to_i
   end
 
   def set_task
