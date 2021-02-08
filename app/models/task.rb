@@ -14,7 +14,7 @@ class Task < ApplicationRecord
   validates :deadline,
             presence: true
 
-
+  
   private
 
   # deadline is an instance of ActiveSupport::TimeWithZone

@@ -1,11 +1,56 @@
 <%= render 'components/navigation' %>
 
-<section class="container container-content is-flex is-justify-content-space-between is-align-content-cente">
-  <h2 class="has-text-white is-size-4"><%= @category.name %></h2>
+<section class="container is-flex is-justify-content-space-between is-align-content-cente">
+  <h2 class="has-text-white is-size-4 has-text-weight-medium"><%= @category.name %></h2>
 
-  <%= link_to tasks_new_path, class: "button is-light" do %>
-    <i class="fas fa-plus mr-3"></i> Add Task
+  <div>
+    <%= link_to categories_path, class: "button is-light" do %>
+      <i class="fas fa-undo-alt mr-3"></i> Go Back
+    <% end %>
+    <%= link_to tasks_new_path, class: "button is-light" do %>
+      <i class="fas fa-plus mr-3"></i> Add Task
+    <% end %>
+  </div>
+</section>
+
+<section class="container container-content mt-6">
+<div class="tile tile-container is-ancestor">
+
+  <% @category.tasks.each do |task| %>
+    <div class="tile tile-item is-parent is-shady">
+    <article class="tile is-child notification is-white">
+
+        <div class="tile-contents">
+          <h3 class="title is-size-4">
+            <i class="fas fa-map-pin has-text-info"></i> 
+            <%= task.name %>
+          </h3>
+
+          <p class="subtitle is-size-7 mb-3 has-text-grey-light">
+            <i class="fas fa-stopwatch has-text-danger"></i>
+            deadline in <%= time_ago_in_words task.deadline %>
+          </p>
+
+          <p class="subtitle is-size-6">
+            <%= task.description %>
+          </p>
+        </div>
+
+        <div class="tile-actions">
+          <%= link_to tasks_edit_path(id: @category.id, tid: task.id), class: :"button is-warning is-light action-tile-button", title: "Edit Task" do %>
+              <i class="fas fa-edit"></i>
+          <% end %>
+
+          <%= link_to tasks_delete_path(id: @category.id, tid: task.id), method: :delete, class: :"button is-danger is-light action-tile-button", title: "Delete Task", data: { confirm: "Are you sure you want to delete #{task.name}?" } do %>
+              <i class="far fa-trash-alt"></i>
+          <% end %>
+        </div>
+
+    </article>
+    </div>
   <% end %>
+
+</div>
 </section>
 
 <%= render 'components/footer' %>
