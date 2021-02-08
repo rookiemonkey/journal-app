@@ -5,7 +5,7 @@ class TaskControllerTest < ActionDispatch::IntegrationTest
 
   def setup
     @category = Category.create(name: 'Category 1', description: ('a'*20))
-    @task = Task.create(name: 'Task One')
+    @task = Task.create(name: 'Task One', description: ('b'*50), deadline: '2021-02-25')
 
     @task.category_id = @category.id
     @category.tasks << @task
