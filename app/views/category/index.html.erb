@@ -6,43 +6,40 @@
   <% end %>
 </section>
 
+
+
+
+<section class="container mt-6">
+
+  <div class="box has-background-warning-ligth has-text-dark is-size-4 has-text-weight-semibold">
+    <i class="fas fa-exclamation-circle has-text-warning mr-1"></i>
+    These tasks requires your attention!
+  </div>
+
+  <div class="tile tile-container is-ancestor">
+    <% @tasks.each do |task| %>
+      <%= render 'components/card_task', task: task %>
+    <% end %>
+  </div>
+
+</section>
+
+
+
+
 <section class="container container-content mt-6">
-<div class="tile tile-container is-ancestor">
 
-  <% @categories.each do |category| %>
-    <div class="tile tile-item is-parent is-shady">
-    <article class="tile is-child notification is-white">
-    
-        <div class="tile-contents">
-          <h3 class="title is-size-4">
-          <i class="fas fa-book mr-1 has-text-info"></i>
-            <%= category.name %>
-          </h3>
+  <div class="box has-background-info-dark has-text-white is-size-4 has-text-weight-semibold">
+    <i class="fas fa-book-reader mr-1"></i>
+    Your Journals
+  </div>
 
-          <p class="subtitle is-size-6">
-            <%= category.description %>
-          </p>
-        </div>
+  <div class="tile tile-container is-ancestor">
+    <% @categories.each do |category| %>
+      <%= render 'components/card_category', category: category %>
+    <% end %>
+  </div>
 
-        <div class="tile-actions">
-          <%= link_to tasks_path(category), class: :"button is-light action-tile-button", title: "View Category" do %>
-              <i class="fas fa-book-reader"></i>
-          <% end %>
-
-          <%= link_to categories_edit_path(category), class: :"button is-warning is-light action-tile-button", title: "Edit Category" do %>
-              <i class="fas fa-edit"></i>
-          <% end %>
-
-          <%= link_to categories_delete_path(category), method: :delete, class: :"button is-danger is-light action-tile-button", title: "Delete Category", data: { confirm: "Are you sure you want to delete #{category.name} and all the tasks associated to it?" } do %>
-              <i class="far fa-trash-alt"></i>
-          <% end %>
-        </div>
-
-    </article>
-    </div>
-  <% end %>
-
-</div>
 </section>
 
 <%= render 'components/footer' %>

@@ -1,0 +1,33 @@
+<div class="tile tile-item is-parent is-shady">
+<article class="tile is-child notification is-white">
+
+
+    <div class="tile-contents">
+      <h3 class="title is-size-4">
+      <i class="fas fa-book mr-1 has-text-info"></i>
+        <%= category.name %>
+      </h3>
+
+      <p class="subtitle is-size-6">
+        <%= category.description %>
+      </p>
+    </div>
+
+
+    <div class="tile-actions">
+      <%= link_to tasks_path(category), class: :"button is-light action-tile-button", title: "View Category" do %>
+          <i class="fas fa-book-reader"></i>
+      <% end %>
+
+      <%= link_to categories_edit_path(category), class: :"button is-warning is-light action-tile-button", title: "Edit Category" do %>
+          <i class="fas fa-edit"></i>
+      <% end %>
+
+      <%= link_to categories_delete_path(category), method: :delete, class: :"button is-danger is-light action-tile-button", title: "Delete Category", data: { confirm: "Are you sure you want to delete #{category.name} and all the tasks associated to it?" } do %>
+          <i class="far fa-trash-alt"></i>
+      <% end %>
+    </div>
+
+
+</article>
+</div>

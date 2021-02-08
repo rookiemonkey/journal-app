@@ -4,6 +4,7 @@ class CategoryController < ApplicationController
 
   def index
     @categories = Category.all
+    @tasks = Task.where('deadline <= ?', Date.today)
   end
 
   def new
