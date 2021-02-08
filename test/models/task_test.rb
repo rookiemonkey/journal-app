@@ -18,31 +18,26 @@ class TaskTest < ActiveSupport::TestCase
     assert_not @task.valid?
   end
 
-  test "2. task should reject name with 5 chars and less" do
-    @task.name = '1111'
+  test "2. task should reject name with 20 chars and more" do
+    @task.name = '1'*21
     assert_not @task.valid?
   end
 
-  test "3. task should reject name with 50 chars and more" do
-    @task.name = '1'*51
-    assert_not @task.valid?
-  end
-
-  test "4. task should be complete false upon creation" do
+  test "3. task should be complete false upon creation" do
     assert_not @task.completed
   end
 
-  test "5. task should reject empty description" do
+  test "4. task should reject empty description" do
     @task.description = ''
     assert_not @task.valid?
   end
 
-  test "6. task should reject description with 150 chars and more" do
+  test "5. task should reject description with 150 chars and more" do
     @task.description = 'a'*151
     assert_not @task.valid?
   end
 
-  test "7. task should reject empty deadline" do
+  test "6. task should reject empty deadline" do
     @task.deadline = ''
     assert_not @task.valid?
   end

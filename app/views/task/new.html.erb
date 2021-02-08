@@ -1,14 +1,23 @@
 <%= render 'components/navigation' %>
 
 <section class="container container-content mt-6">
-  <h1>CREATING A TASK</h1>
+<div class="columns">
 
-  <%= form_with scope: :task, url: tasks_create_path, local: true, method: :post do |f| %>
-    <%= f.text_field :name, autocomplete: :off %>
-    <%= f.text_area :description, autocomplete: :off %>
-    <%= f.date_field :deadline %>
-  <% end %>
 
+  <div class="column is-6 container-left">
+    <%= image_tag :'create.task.svg'  %>
+  </div>
+
+  <div class="column is-6 container-right">
+
+    <%= form_with scope: :task, url: tasks_create_path, local: true, method: :post do |f| %>
+      <%= render 'task/form_fields', form: f, action: 'Create' %>
+    <% end %>
+
+  </div>
+
+
+</div>
 </section>
 
 <%= render 'components/footer' %>

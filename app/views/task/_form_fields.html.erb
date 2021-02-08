@@ -1,0 +1,52 @@
+
+<div class="field">
+<div class="control has-icons-left has-icons-right">
+
+  <%= form.text_field :name, placeholder: "Task Name", class: "input is-medium is-info", autocomplete: :off, maxlength: 20 %>
+
+  <span class="icon is-left">
+    <i class="fas fa-cogs"></i>
+  </span>
+  <span class="icon is-right">
+    <i class="fas fa-check"></i>
+  </span>
+
+</div>
+</div>
+
+
+
+<div class="field">
+<div class="control">
+
+  <%= form.text_area :description, placeholder: "Task Description", class: "textarea is-info has-fixed-size", maxlength: 150, minlength: 10, autocomplete: 'off' %>
+
+</div>
+</div>
+
+
+<div class="field">
+<div class="control">
+
+  <%= form.label :deadline %>
+  <%= form.date_field :deadline, class: "input" %>
+
+</div>
+</div>
+
+
+<div class="field">
+<div class="control">
+
+  <%= link_to tasks_path(params[:id]), class: "button is-warning" do %>
+    <i class="fas fa-undo-alt mr-3"></i> Cancel
+  <% end %>
+
+  <%= form.button class: "button is-info" do %>
+    <%= raw '<i class="fas fa-plus mr-3"></i>' if action == 'Create' %>
+    <%= raw '<i class="fas fa-edit mr-3"></i>' if action == 'Update' %>
+    <%= action %> Task
+  <% end %>
+
+</div>
+</div>

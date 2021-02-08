@@ -1,14 +1,23 @@
 <%= render 'components/navigation' %>
 
 <section class="container container-content mt-6">
-  <h1>EDITING A TASK</h1>
+<div class="columns">
 
-  <%= form_with model: @task, url: tasks_update_path, method: :patch, local: true do |f| %>
-    <%= f.text_field :name, autocomplete: :off %>
-    <%= f.text_area :description, autocomplete: :off %>
-    <%= f.date_field :deadline %>
-  <% end %>
 
+  <div class="column is-6 container-left">
+    <%= image_tag :'create.task.svg'  %>
+  </div>
+
+  <div class="column is-6 container-right">
+
+    <%= form_with model: @task, url: tasks_update_path, method: :patch, local: true do |f| %>
+      <%= render 'task/form_fields', form: f , action: 'Update'%>
+    <% end %>
+
+  </div>
+
+
+</div>
 </section>
 
 <%= render 'components/footer' %>
