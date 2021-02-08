@@ -83,11 +83,4 @@ class TaskControllerTest < ActionDispatch::IntegrationTest
     assert Category.find(@category.id).tasks.length < old_tasks_count
   end
 
-  test "5.1 should be able to show task" do
-    get tasks_show_path(id: @task.category_id, tid: @task.id)
-    assert_response :success
-    assert_not_nil assigns(:task)
-  end
-
-
 end
