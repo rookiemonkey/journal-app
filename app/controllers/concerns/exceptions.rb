@@ -8,6 +8,8 @@ module Exceptions
     class NotFoundJournalError < StandardError; end
     class CreateJournalError < StandardError; end
     class UpdateJournalError < StandardError; end
+    class CreateTaskError < StandardError; end
+    class UpdateTaskError < StandardError; end
 
   end
 end

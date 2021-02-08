@@ -15,11 +15,13 @@ class TaskController < ApplicationController
   def create
     @task = Task.new(self.extract_params)
     @task.category_id = @category.id
-    @task.save
+    raise CreateTaskError.new('Failed to create task') unless @task.save
+    redirect_to tasks_path(@task.category_id)
   end
 
   def update
-    @task.update(self.extract_params)
+    raise UpdateTaskError.new('Failed to update task') unless @task.update(self.extract_params)
+    redirect_to tasks_path(@task.category_id)
   end
 
   def delete

@@ -10,6 +10,8 @@
 
   <div class="column is-6 container-right">
 
+    <%= render 'components/form_errors', instance: @task  %>
+
     <%= form_with scope: :task, url: tasks_create_path, local: true, method: :post do |f| %>
       <%= render 'task/form_fields', form: f, action: 'Create' %>
     <% end %>
