@@ -2,11 +2,6 @@ class CategoryController < ApplicationController
 
   before_action :set_category, only: [:delete, :edit, :update]
 
-  def index
-    @categories = Category.all
-    @tasks = Task.where('deadline <= ?', Date.today)
-  end
-
   def new
   end
 
