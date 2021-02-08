@@ -22,6 +22,12 @@ class CategoryController < ApplicationController
     redirect_to(categories_path, notice: 'Successfully created your journal')
   end
 
+  def create_task
+    @task = Task.create(self.extract_params_task)
+    raise CreateJournalTaskError.new('Failed to create task') unless @task.valid?
+    redirect_to(categories_path, notice: 'Successfully created a task')
+  end
+
   def update
     @category.update(self.extract_params)
     raise UpdateJournalError.new('Failed to update journal') unless @category.valid?
@@ -43,6 +49,10 @@ class CategoryController < ApplicationController
 
   def extract_params
     params.require(:category).permit(:name, :description)
+  end
+
+  def extract_params_task
+    params.require(:task).permit(:name, :description, :category_id, :deadline)
   end
 
 end

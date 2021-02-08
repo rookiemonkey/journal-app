@@ -38,13 +38,13 @@
 <div class="field">
 <div class="control">
 
-  <% unless params[:action] == 'new_task' %>
+  <% unless params[:action] == 'new_task' or params[:action] == 'create_task' %>
     <%= link_to tasks_path(params[:id]), class: "button is-warning" do %>
       <i class="fas fa-undo-alt mr-3"></i> Cancel
     <% end %>
   <% end %>
 
-  <% if params[:action] == 'new_task' %>
+  <% if params[:action] == 'new_task' or params[:action] == 'create_task' %>
     <%= link_to categories_path, class: "button is-warning" do %>
       <i class="fas fa-undo-alt mr-3"></i> Cancel
     <% end %>

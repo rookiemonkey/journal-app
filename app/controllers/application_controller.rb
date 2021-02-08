@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   rescue_from ActiveRecord::RecordNotFound, with: :notfound_error
   rescue_from CreateJournalError, with: :create_journal_error
   rescue_from UpdateJournalError, with: :update_journal_error
+  rescue_from CreateJournalTaskError, with: :create_journal_task_error
   rescue_from CreateTaskError, with: :create_task_error
   rescue_from UpdateTaskError, with: :update_task_error
 
@@ -17,6 +18,11 @@ class ApplicationController < ActionController::Base
   def create_journal_error(exception)
     flash.now[:alert] = exception.message
     render 'category/new'
+  end
+
+  def create_journal_task_error(exception)
+    flash.now[:alert] = exception.message
+    render 'category/new_task'
   end
 
   def update_journal_error(exception)

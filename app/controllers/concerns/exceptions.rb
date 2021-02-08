@@ -6,6 +6,7 @@ module Exceptions
     # just renaming standard error to something
 
     class NotFoundJournalError < StandardError; end
+    class CreateJournalTaskError < StandardError; end
     class CreateJournalError < StandardError; end
     class UpdateJournalError < StandardError; end
     class CreateTaskError < StandardError; end

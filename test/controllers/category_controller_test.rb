@@ -129,4 +129,23 @@ class CategoryControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+
+  test "20. category new_task should create a task associated to the category" do
+    old_count = @category.tasks.count
+
+    assert_difference('Task.count', 1) do
+      post categories_create_task_path, params: {
+        task: {
+          name: 'Task Name',
+          description: 'Task Description',
+          deadline: '2025-02-20',
+          category_id: @category.id
+        }
+      }
+    end
+
+    assert old_count < @category.tasks.count
+  end
+
+
 end
