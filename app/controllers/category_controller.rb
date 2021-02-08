@@ -1,6 +1,6 @@
 class CategoryController < ApplicationController
 
-  before_action :set_category, only: [:show, :delete, :edit, :update]
+  before_action :set_category, only: [:delete, :edit, :update]
 
   def index
     @categories = Category.all
@@ -12,19 +12,16 @@ class CategoryController < ApplicationController
   def edit
   end
 
-  def show
-  end
-
   def create
     @category = Category.create(self.extract_params)
     raise CreateJournalError.new('Failed to create journal') unless @category.valid?
-    redirect_to(categories_show_path(@category), notice: 'Successfully created your journal')
+    redirect_to(tasks_path(@category), notice: 'Successfully created your journal')
   end
 
   def update
     @category.update(self.extract_params)
     raise UpdateJournalError.new('Failed to update journal') unless @category.valid?
-    redirect_to(categories_show_path(@category), notice: 'Successfully updated your journal')
+    redirect_to(tasks_path(@category), notice: 'Successfully updated your journal')
   end
 
   def delete

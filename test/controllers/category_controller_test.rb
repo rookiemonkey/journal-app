@@ -25,12 +25,6 @@ class CategoryControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  
-  test "4. should get show" do
-    get categories_show_path(@category)
-    assert_response :success
-  end
-
 
   test "5. should delete a category" do
     assert_difference('Category.count', -1) do
@@ -39,9 +33,9 @@ class CategoryControllerTest < ActionDispatch::IntegrationTest
   end
 
 
-  test "6. index should have a link to show a category" do
+  test "6. index should have a link to show category tasks" do
     get categories_path
-    assert_select "a:match('href', ?)", categories_show_path(@category)
+    assert_select "a:match('href', ?)", tasks_path(@category)
   end
 
 
@@ -66,19 +60,6 @@ class CategoryControllerTest < ActionDispatch::IntegrationTest
   test "10. index should have a categories instance variable" do
     get categories_path
     assert_not_nil assigns(:categories)
-  end
-
-
-  test "11. show should show the category name and description" do
-    get categories_show_path(@category)
-    assert_match @category.name, response.body
-    assert_match @category.description, response.body
-  end
-
-
-  test "12. show should have a category instance variable" do
-    get categories_show_path(@category)
-    assert_not_nil assigns(:category)
   end
 
 
@@ -123,10 +104,6 @@ class CategoryControllerTest < ActionDispatch::IntegrationTest
     assert_match 'Failed', response.body
   end
 
-  test "16. show should redirect to category index a category doesn't exist" do
-    get categories_show_path(9999)
-    assert_redirected_to categories_path
-  end
 
   test "17. edit should be able to update a category name" do
     patch categories_update_path(@category), params: {
@@ -135,6 +112,7 @@ class CategoryControllerTest < ActionDispatch::IntegrationTest
     
     assert Category.find(@category.id).name == 'UPDATED CATEGORY!'
   end
+
 
   test "18. edit should be able to update a category description" do
     patch categories_update_path(@category), params: {
