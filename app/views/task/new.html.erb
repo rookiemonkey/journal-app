@@ -1,0 +1,5 @@
+<%= form_with scope: :task, url: tasks_create_path, local: true, method: :post do |f| %>
+  <%= f.text_field :name, autocomplete: :off %>
+  <%= f.text_area :description, autocomplete: :off %>
+  <%= f.date_field :deadline %>
+<% end %>
