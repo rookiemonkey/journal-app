@@ -2,15 +2,13 @@ Rails.application.routes.draw do
 
   devise_for :users, skip: [:sessions]
 
-  # AUTHENTICATION
   devise_scope :user do
-    get '/signup',                                to: 'devise/registrations#new'
-    get '/signin',                                to: 'devise/sessions#new'     
-    post '/signin',                               to: 'devise/sessions#create'      
-    post '/signup',                               to: 'devise/registrations#create'
-    delete '/signout',                            to: 'devise/sessions#destroy'   
+    get '/signup',          to: 'devise/registrations#new',     as: 'signup_new'
+    get '/signin',          to: 'devise/sessions#new',          as: 'signin_new'
+    post '/signin',         to: 'devise/sessions#create',       as: 'signin_create'
+    post '/signup',         to: 'devise/registrations#create',  as: 'signup_create'
+    delete '/signout',      to: 'devise/sessions#destroy',      as: 'signout'
   end
-
 
   # HOME
   root                                          to: 'home#home'
