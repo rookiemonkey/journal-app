@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
 
   def create_journal_task_error(exception)
     flash.now[:alert] = exception.message
-    render 'category/new_task'
+    render 'home/new_task'
   end
 
   def update_journal_error(exception)

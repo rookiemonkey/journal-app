@@ -9,8 +9,8 @@ class CategoryController < ApplicationController
   end
 
   def create
-    category = Category.create(self.extract_params)
-    raise CreateJournalError.new('Failed to create journal') unless category.valid?
+    @category = Category.create(self.extract_params)
+    raise CreateJournalError.new('Failed to create journal') unless @category.valid?
     redirect_to(root_path, notice: 'Successfully created your journal')
   end
 
