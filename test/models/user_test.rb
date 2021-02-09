@@ -54,12 +54,18 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user.valid?
   end
 
-  test "user should be able to accept correct password" do
+  test "user should accept correct password" do
     assert @user.valid_password?('987654321')
   end
 
-  test "user should be able to reject incorrect password" do
+  test "user should reject incorrect password" do
     assert_not @user.valid_password?('fasdfasfsadf')
+  end
+
+  test "user should reject passwords that is less than 6 chars in length" do
+    @user.password = '12345'
+    @user.password_confirmation = '12345'
+    assert_not @user.valid?
   end
 
 end
