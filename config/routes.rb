@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  devise_for :users
+
   # HOME
   root                                          to: 'home#home'
   get     '/task/new',                          to: 'home#new_task',        as: 'home_new_task'
