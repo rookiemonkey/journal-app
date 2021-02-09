@@ -1,40 +1,69 @@
-<h2>Sign up</h2>
+<%= render 'components/navigation' %>
 
-<%= form_for resource, as: resource_name, url: signup_create_path do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+<section class="container container-content mt-6">
+<div class="columns">
 
+  <div class="column is-6 container-left">
+    <%= image_tag :'signup.svg'  %>
+  </div>
+      
+  <div class="column is-6 container-right">
 
-  <div class="field">
-    <%= f.label :'First Name' %><br />
-    <%= f.text_field :first_name, autofocus: true, autocomplete: "off" %>
+    <%= render 'components/form_errors', instance: resource %>
+
+    <%= form_for resource, as: resource_name, url: signup_create_path do |f| %>
+
+      <div class="field">
+      <div class="control"> 
+        <%= f.label :'First Name' %><br />
+        <%= f.text_field :first_name, class: "input", autofocus: true, autocomplete: "off" %>
+      </div>
+      </div>
+
+      <div class="field">
+      <div class="control">
+        <%= f.label :'Last Name' %><br />
+        <%= f.text_field :last_name, class: "input", autofocus: true, autocomplete: "off" %>
+      </div>
+      </div>
+
+      <div class="field">
+      <div class="control">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, class: "input", autofocus: true, autocomplete: "off" %>
+      </div>
+      </div>
+
+      <div class="field">
+      <div class="control">
+        <%= f.label :password %>
+        <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %><br />
+        <%= f.password_field :password, class: "input", autocomplete: "off" %>
+      </div>
+      </div>
+
+      <div class="field">
+      <div class="control">
+        <%= f.label :password_confirmation %><br />
+        <%= f.password_field :password_confirmation, class: "input",  autocomplete: "off" %>
+      </div>
+      </div>
+
+      <div class="field">
+      <div class="control">
+        <%= f.button class: "button is-info" do %>
+          <i class="fas fa-user-plus mr-3"></i> Signup
+        <% end %>
+        <%= render "devise/shared/links" %>
+      </div>
+      </div>
+    <% end %>
+
   </div>
 
-    <div class="field">
-    <%= f.label :'Last Name' %><br />
-    <%= f.text_field :last_name, autofocus: true, autocomplete: "off" %>
-  </div>
+</div>
+</section>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+<%= render 'components/footer' %>
