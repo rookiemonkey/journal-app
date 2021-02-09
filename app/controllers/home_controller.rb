@@ -1,5 +1,7 @@
 class HomeController < ApplicationController
 
+  before_action :redirect_if_not_loggedin
+
   def new_task
   end
 

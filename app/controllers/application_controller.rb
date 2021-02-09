@@ -12,6 +12,14 @@ class ApplicationController < ActionController::Base
 
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+
+  
+  def redirect_if_not_loggedin
+    redirect_to(signin_new_path, { alert: 'Please sign in first' })  unless user_signed_in?
+  end
+
+
+
   protected  
 
   def configure_permitted_parameters

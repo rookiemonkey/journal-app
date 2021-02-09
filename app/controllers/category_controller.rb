@@ -1,5 +1,6 @@
 class CategoryController < ApplicationController
 
+  before_action :redirect_if_not_loggedin
   before_action :set_category, only: [:delete, :edit, :update]
 
   def new

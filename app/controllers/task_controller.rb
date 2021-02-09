@@ -1,5 +1,6 @@
 class TaskController < ApplicationController
 
+  before_action :redirect_if_not_loggedin
   before_action :set_category, only: [:index, :create, :delete, :update, :edit]
   before_action :set_task, only: [:edit, :delete, :update, :show]
 
