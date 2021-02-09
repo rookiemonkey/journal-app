@@ -11,7 +11,7 @@
 
     <%= render 'components/form_errors', instance: @task  %>
 
-    <%= form_with scope: :task, url: categories_create_task_path, method: :post do |f| %>
+    <%= form_with scope: :task, url: home_create_task_path, method: :post do |f| %>
         
         <div class="field">
         <div class="control select is-info is-medium" style="width: 100%">

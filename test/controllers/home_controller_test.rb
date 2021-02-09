@@ -42,4 +42,29 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     assert_match @category.name, response.body
   end
 
+  
+  test "home_new_task_path should show a form" do
+    get home_new_task_path
+    assert_response :success
+  end
+
+
+  test "home_create_task_path should create a task associated to the category" do
+    old_count = @category.tasks.count
+
+    assert_difference('Task.count', 1) do
+      post home_create_task_path, params: {
+        task: {
+          name: 'Task Name',
+          description: 'Task Description',
+          deadline: '2025-02-20',
+          category_id: @category.id
+        }
+      }
+    end
+
+    assert old_count < @category.tasks.count
+  end
+
+
 end

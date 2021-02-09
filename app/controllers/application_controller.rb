@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   protected  
 
   def notfound_error(exception)
-    redirect_to categories_path, alert: "Oh snap! That one doesn't exists"
+    redirect_to root_path, alert: "Oh snap! That one doesn't exists"
   end
 
   def create_journal_error(exception)

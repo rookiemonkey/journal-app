@@ -34,7 +34,7 @@ class CategoryControllerTest < ActionDispatch::IntegrationTest
       } } 
     end
 
-    assert_redirected_to categories_path
+    assert_redirected_to root_path
   end
 
 
@@ -72,7 +72,7 @@ class CategoryControllerTest < ActionDispatch::IntegrationTest
     }
     
     assert Category.find(@category.id).name == 'UPDATED CATEGORY!'
-    assert_redirected_to categories_path
+    assert_redirected_to root_path
   end
 
 
@@ -82,32 +82,7 @@ class CategoryControllerTest < ActionDispatch::IntegrationTest
     }
     
     assert Category.find(@category.id).description == 'UPDATED DESCRIPTION!'
-    assert_redirected_to categories_path
+    assert_redirected_to root_path
   end
-
-
-  test "9. category new_task should show a form" do
-    get categories_new_task_path
-    assert_response :success
-  end
-
-
-  test "10. category new_task should create a task associated to the category" do
-    old_count = @category.tasks.count
-
-    assert_difference('Task.count', 1) do
-      post categories_create_task_path, params: {
-        task: {
-          name: 'Task Name',
-          description: 'Task Description',
-          deadline: '2025-02-20',
-          category_id: @category.id
-        }
-      }
-    end
-
-    assert old_count < @category.tasks.count
-  end
-
 
 end
