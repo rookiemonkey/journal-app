@@ -1,26 +1,51 @@
-<h2>Log in</h2>
+<%= render 'components/navigation' %>
 
-<%= form_for(resource, as: resource_name, url: signin_create_path) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "off" %>
+<section class="container container-content mt-6">
+<div class="columns">
+
+  <div class="column is-6 container-left">
+    <%= image_tag :'signin.svg'  %>
   </div>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
+  <div class="column is-6 container-right">
+
+    <%= form_for(resource, as: resource_name, url: signin_create_path) do |f| %>
+
+      <div class="field">
+      <div class="control"> 
+        <%= f.label :email %><br />
+        <%= f.email_field :email, class: "input", autofocus: true, autocomplete: "off" %>
+      </div>
+      </div>
+
+      <div class="field">
+      <div class="control"> 
+        <%= f.label :password %> <br />
+        <%= f.password_field :password, class: "input", autocomplete: "off" %>
+      </div>
+      </div>
+
+      <div class="field">
+      <div class="control">
+        <%= f.button class: "button is-info" do %>
+          <i class="fas fa-sign-in-alt mr-3"></i> Signin
+        <% end %>
+        <%= render "devise/shared/links" %>
+      </div>
+      </div>
+
+      <div class="field">
+      <div class="control">
+      <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+        <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
+      <% end %>
+      </div>
+      </div>
+    <% end %>
+
   </div>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-  <% end %>
+</div>
+</section>
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+<%= render 'components/footer' %>
