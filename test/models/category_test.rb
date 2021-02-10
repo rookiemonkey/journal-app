@@ -33,10 +33,4 @@ class CategoryTest < ActiveSupport::TestCase
     assert_not @category.valid?
   end
 
-  test "6. should reject a category with the same name" do
-    @category.save
-    new_category = Category.new(name: "Category One", description: ('a'*20))
-    assert_not new_category.valid?
-  end
-
 end
