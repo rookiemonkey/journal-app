@@ -10,8 +10,16 @@
         <%= link_to 'Journal App', root_path, class: "title has-text-primary-light" %>
     </span>
     <span>
-      <i class="far fa-calendar-alt"></i> <%= date_full_words Time.now %>
-    </span>
+      <span>
+        <i class="far fa-calendar-alt"></i> <%= date_full_words Time.now %>
+      </span>
+
+      <% unless current_user.nil? %>
+        <%= link_to signout_path, method: :delete, class: "button is-warning" do %>
+            <i class="fas fa-sign-out-alt mr-3"></i> Signout
+        <% end %>
+      <% end %>
+    <span>
   </h1>
 
 </div>
