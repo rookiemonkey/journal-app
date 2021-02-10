@@ -33,28 +33,28 @@ class ApplicationController < ActionController::Base
     redirect_to root_path, alert: "Oh snap! That one doesn't exists"
   end
 
-  def create_journal_error(exception)
-    flash.now[:alert] = exception.message
+  def create_journal_error
+    flash.now[:alert] = 'Failed to create journal'
     render 'category/new'
   end
 
-  def create_journal_task_error(exception)
-    flash.now[:alert] = exception.message
+  def create_journal_task_error
+    flash.now[:alert] = 'Failed to create task'
     render 'home/new_task'
   end
 
-  def update_journal_error(exception)
-    flash.now[:alert] = exception.message
+  def update_journal_error
+    flash.now[:alert] = 'Failed to update journal'
     render 'category/edit'
   end
 
-  def create_task_error(exception)
-    flash.now[:alert] = exception.message
+  def create_task_error
+    flash.now[:alert] = 'Failed to create task'
     render 'task/new'
   end
 
-  def update_task_error(exception)
-    flash.now[:alert] = exception.message
+  def update_task_error
+    flash.now[:alert] = 'Failed to update task'
     render 'task/edit'
   end
 

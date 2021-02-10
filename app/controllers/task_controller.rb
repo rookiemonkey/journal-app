@@ -19,20 +19,23 @@ class TaskController < ApplicationController
     @task = Task.new(self.extract_params)
     @task.category_id = @category.id
     @task.user_id = current_user.id
-    raise CreateTaskError.new('Failed to create task') unless @task.save
-    redirect_to(tasks_path(@category.id), notice: "Successfully created a task for #{@category.name}")
+    raise CreateTaskError unless @task.save
+    redirect_to(tasks_path(@category.id), 
+                notice: "Successfully created a task for #{@category.name}")
   end
 
   def update
     raise UnauthorizedError unless self.is_owner?
-    raise UpdateTaskError.new('Failed to update task') unless @task.update(self.extract_params)
-    redirect_to(tasks_path(@category.id), notice: "Successfully updated a task for #{@category.name}")
+    raise UpdateTaskError unless @task.update(self.extract_params)
+    redirect_to(tasks_path(@category.id), 
+                notice: "Successfully updated a task for #{@category.name}")
   end
 
   def delete
     raise UnauthorizedError unless self.is_owner?
     @task.destroy
-    redirect_to(tasks_path(@category.id), notice: "Successfully deleted a task for #{@category.name}")
+    redirect_to(tasks_path(@category.id), 
+                notice: "Successfully deleted a task for #{@category.name}")
   end
 
 
