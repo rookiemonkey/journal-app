@@ -1,16 +1,17 @@
 require "test_helper"
-require "pp"
 
 class TaskTest < ActiveSupport::TestCase
 
   def setup
     category = Category.create(name: "Category One", 
-                              description: ("a"*50))
+                              description: ("a"*50),
+                              user_id: users(:user_one).id)
 
     @task = Task.create(name: "Task One", 
                         description: ("a"*50), 
                         deadline: "2021-03-30", 
-                        category_id: category.id)
+                        category_id: category.id,
+                        user_id: users(:user_one).id)
   end
 
   test "1. task should reject empty name" do

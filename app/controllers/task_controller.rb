@@ -16,6 +16,7 @@ class TaskController < ApplicationController
   def create
     @task = Task.new(self.extract_params)
     @task.category_id = @category.id
+    @task.user_id = current_user.id
     raise CreateTaskError.new('Failed to create task') unless @task.save
     redirect_to(tasks_path(@category.id), notice: "Successfully created a task for #{@category.name}")
   end

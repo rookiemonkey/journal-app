@@ -7,7 +7,8 @@ class HomeController < ApplicationController
 
   def create_task
     @task = Task.create(self.extract_params_task)
-    raise CreateJournalTaskError.new('Failed to create task') unless @task.valid?
+    @task.user_id = current_user.id
+    raise CreateJournalTaskError.new('Failed to create task') unless @task.save
     redirect_to(root_path, notice: 'Successfully created a task')
   end
 

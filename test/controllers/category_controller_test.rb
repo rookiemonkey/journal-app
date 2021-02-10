@@ -1,10 +1,11 @@
 require "test_helper"
-require "pp"
 
 class CategoryControllerTest < ActionDispatch::IntegrationTest
 
   def setup
-    @category = Category.create(name: 'Category 1', description: ('a'*20))
+    @category = Category.create(name: 'Category 1', 
+                                description: ('a'*20),
+                                user_id: users(:user_one).id)
     sign_in users(:user_one)
   end
 
@@ -51,9 +52,8 @@ class CategoryControllerTest < ActionDispatch::IntegrationTest
 
 
   test "4.1 should be able to create a category" do
-
     assert_difference('Category.count', 1) do
-      post categories_new_path, params: { category: { 
+      post categories_create_path, params: { category: { 
         name: 'Category Three',
         description: "a"*21
       } } 
@@ -67,7 +67,7 @@ class CategoryControllerTest < ActionDispatch::IntegrationTest
     sign_out :user
 
     assert_no_difference('Category.count') do
-      post categories_new_path, params: { category: { 
+      post categories_create_path, params: { category: { 
         name: 'Category Three',
         description: "a"*21
       } } 
@@ -80,7 +80,7 @@ class CategoryControllerTest < ActionDispatch::IntegrationTest
   test "4.3 should be able to reject a category if name is empty" do
 
     assert_no_difference('Category.count') do
-      post categories_new_path, params: { category: { 
+      post categories_create_path, params: { category: { 
         name: '',
         description: "a"*20
       } } 
@@ -94,7 +94,7 @@ class CategoryControllerTest < ActionDispatch::IntegrationTest
   test "4.4 should be able to reject a category if description is empty" do
 
     assert_no_difference('Category.count') do
-      post categories_new_path, params: { category: { 
+      post categories_create_path, params: { category: { 
         name: 'Category Three',
         description: ""
       } } 

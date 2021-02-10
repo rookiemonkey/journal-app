@@ -1,14 +1,21 @@
 require "test_helper"
-require "pp"
 
 class CategoryTaskTest < ActiveSupport::TestCase
 
   def setup
-    @task = Task.create(name: "Task One")
-    @category = Category.create(name: "Category One", description: ('a'*20))
+    @category = Category.create(name: "Category One", 
+                                description: ('a'*20),
+                                user_id: users(:user_one).id)
+
+    @task = Task.create(name: "Task One", 
+                        description: ("a"*50), 
+                        deadline: "2021-03-30", 
+                        category_id: @category.id,
+                        user_id: users(:user_one).id)
   end
 
   test "task should reject if not associated to any category" do
+    @task.category_id = ''
     assert_not @task.valid?
   end
 

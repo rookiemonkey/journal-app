@@ -1,10 +1,12 @@
 require "test_helper"
-require "pp"
 
 class HomeControllerTest < ActionDispatch::IntegrationTest
 
   def setup
-    @category = Category.create(name: 'Category 1', description: ('a'*20))
+    @category = Category.create(name: 'Category 1', 
+                                description: ('a'*20),
+                                user_id: users(:user_one).id)
+                                
     sign_in users(:user_one)
   end
 

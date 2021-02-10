@@ -1,11 +1,17 @@
 require "test_helper"
-require "pp"
 
 class TaskControllerTest < ActionDispatch::IntegrationTest
 
   def setup
-    @category = Category.create(name: 'Category 1', description: ('a'*20))
-    @task = Task.create(name: 'Task One', description: ('b'*50), deadline: '2021-12-25')
+    @category = Category.create(name: 'Category 1', 
+                                description: ('a'*20),
+                                user_id: users(:user_one).id)
+
+    @task = Task.create(name: 'Task One', 
+                        description: ('b'*50), 
+                        deadline: '2021-12-25',
+                        user_id: users(:user_one).id,
+                        category_id: @category.id)
 
     @task.category_id = @category.id
     @category.tasks << @task
