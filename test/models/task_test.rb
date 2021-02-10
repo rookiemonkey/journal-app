@@ -54,7 +54,7 @@ class TaskTest < ActiveSupport::TestCase
     deadline << "-#{time_now.month}"
     deadline << "-#{time_now.day}"
     @task.deadline = deadline
-    assert_not @task.valid?
+    assert @task.valid?
   end
 
 end
