@@ -8,8 +8,19 @@
 
 
 
+# USER CREATION
 
+user_one = User.create(first_name: 'Kevin One',
+            last_name: 'Basina',
+            email: 'one@gmail.com',
+            password: '987654321',
+            encrypted_password: Devise::Encryptor.digest(User, '987654321'))
 
+User.create(first_name: 'Kevin Two',
+            last_name: 'Basina',
+            email: 'two@gmail.com',
+            password: '987654321',
+            encrypted_password: Devise::Encryptor.digest(User, '987654321'))
 
 
 # CATEGORY CREATION
@@ -19,7 +30,8 @@ categories = ['Groceries', 'Church', 'Work', 'Chores', 'Code', 'School']
 categories.each do |category|
 
   Category.create(  name: category, 
-                    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam risus, lacinia et luctus id, port")
+                    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam risus, lacinia et luctus id, port",
+                    user_id: user_one.id)
 
 end
 
@@ -42,7 +54,8 @@ Category.all.each do |category|
     Task.create(name: "#{category.name} #{i+1}",
                     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam risus, lacinia et luctus id, port",
                     deadline: "#{now.year+1}-#{month.sample}-#{day.sample}",
-                    category_id: category.id)
+                    category_id: category.id,
+                    user_id: user_one.id)
   end
 
 
@@ -51,5 +64,6 @@ Category.all.each do |category|
   Task.create(name: "#{category.name} 11",
               description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam risus, lacinia et luctus id, port",
               deadline: "#{now.year}-#{now.month}-#{now.day}",
-              category_id: category.id)
+              category_id: category.id,
+              user_id: user_one.id)
 end

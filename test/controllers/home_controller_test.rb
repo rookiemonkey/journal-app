@@ -54,6 +54,23 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     assert_match @category.name, response.body
   end
 
+
+  test "1.8 home should only show categories for the current user" do
+    self.generate_category('Ten')
+    self.generate_category('Nine')
+
+    user_categories = Category.where(user_id: users(:user_one).id)
+    all_categories = Category.all
+
+    for_user = all_categories.select { |c| c.user_id == users(:user_one).id }
+
+    assert for_user.length == user_categories.length
+    assert all_categories.length > user_categories.length
+
+    get root_path
+    assert controller.instance_variable_get(:@categories).length == user_categories.length
+  end
+
   
   test "2.1 home_new_task_path should show a form" do
     get home_new_task_path
@@ -102,5 +119,13 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to signin_new_path
   end
 
+
+  private
+  
+  def generate_category(name)
+    Category.create(name: "Category #{name}", 
+                    description: ('a'*20),
+                    user_id: 98989898898989898989)
+  end
 
 end
