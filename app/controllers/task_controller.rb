@@ -3,16 +3,16 @@ class TaskController < ApplicationController
   before_action :redirect_if_not_loggedin
   before_action :set_category, only: [:index, :create, :delete, :update, :edit]
   before_action :set_task, only: [:edit, :delete, :update, :show]
+  before_action :is_owner_of_category?, only: [:index, :create, :edit, :update, :delete]
+  before_action :is_owner_of_task?, only: [:edit, :delete, :update, :show]
 
   def index
-    raise UnauthorizedError unless self.is_owner?
   end
 
   def new
   end
 
   def edit
-    raise UnauthorizedError unless self.is_owner?
   end
   
   def create
@@ -25,14 +25,12 @@ class TaskController < ApplicationController
   end
 
   def update
-    raise UnauthorizedError unless self.is_owner?
     raise UpdateTaskError unless @task.update(self.extract_params)
     redirect_to(tasks_path(@category.id), 
                 notice: "Successfully updated a task for #{@category.name}")
   end
 
   def delete
-    raise UnauthorizedError unless self.is_owner?
     @task.destroy
     redirect_to(tasks_path(@category.id), 
                 notice: "Successfully deleted a task for #{@category.name}")
@@ -54,8 +52,12 @@ class TaskController < ApplicationController
     params.require(:task).permit(:name, :description, :deadline)
   end
 
-  def is_owner?
-    current_user.id == @category.user_id
+  def is_owner_of_category?
+    raise UnauthorizedError unless current_user.id == @category.user_id
+  end
+
+  def is_owner_of_task?
+    raise UnauthorizedError unless current_user.id == @task.user_id
   end
 
 end
