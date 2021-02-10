@@ -35,7 +35,14 @@ class TaskControllerTest < ActionDispatch::IntegrationTest
   end
 
 
-  test "1.3 index should have @category instance variable" do
+  test "1.3 should not get index of other users" do
+    self.login_hacker
+    get tasks_path @category
+    assert_redirected_to root_path
+  end
+
+
+  test "1.4 index should have @category instance variable" do
     get tasks_path @category
     assert_not_nil assigns(:category)
   end
@@ -101,7 +108,14 @@ class TaskControllerTest < ActionDispatch::IntegrationTest
   end
 
 
-  test "3.3 should be able to update task name" do
+  test "3.3 should not get edit if not the owner" do
+    self.login_hacker
+    get tasks_edit_path(id: @task.category_id, tid: @task.id)
+    assert_redirected_to root_path
+  end
+
+
+  test "3.4 should be able to update task name" do
     patch tasks_update_path(id: @task.category_id, tid: @task.id), params: {
       task: { name: 'UPDATED TASK!' }
     }
@@ -109,7 +123,17 @@ class TaskControllerTest < ActionDispatch::IntegrationTest
   end
 
 
-  test "3.4 should not be able to update task name if not logged in" do
+  test "3.5 should not be able to update task name if not the owner" do
+    self.login_hacker
+    patch tasks_update_path(id: @task.category_id, tid: @task.id), params: {
+      task: { name: 'UPDATED TASK!' }
+    }
+    assert Task.find(@task.id).name != 'UPDATED TASK!'
+    assert_redirected_to root_path
+  end
+
+
+  test "3.6 should not be able to update task name if not logged in" do
     sign_out :user
     patch tasks_update_path(id: @task.category_id, tid: @task.id), params: {
       task: { name: 'UPDATED TASK!' }
@@ -119,7 +143,7 @@ class TaskControllerTest < ActionDispatch::IntegrationTest
   end
 
 
-  test "3.5 should be able to update task description" do
+  test "3.7 should be able to update task description" do
     patch tasks_update_path(id: @task.category_id, tid: @task.id), params: {
       task: { description: 'UPDATED DESCRIPTION!' }
     }
@@ -127,7 +151,17 @@ class TaskControllerTest < ActionDispatch::IntegrationTest
   end
 
 
-  test "3.6 should not be able to update task description if not logged in" do
+  test "3.8 should not be able to update task description if not the owner" do
+    self.login_hacker
+    patch tasks_update_path(id: @task.category_id, tid: @task.id), params: {
+      task: { description: 'UPDATED DESCRIPTION!' }
+    }
+    assert Task.find(@task.id).description != 'UPDATED DESCRIPTION!'
+    assert_redirected_to root_path
+  end
+
+
+  test "3.9 should not be able to update task description if not logged in" do
     sign_out :user
     patch tasks_update_path(id: @task.category_id, tid: @task.id), params: {
       task: { description: 'UPDATED DESCRIPTION!' }
@@ -137,7 +171,7 @@ class TaskControllerTest < ActionDispatch::IntegrationTest
   end
 
 
-  test "3.7 should be able to update deadline" do
+  test "3.10 should be able to update deadline" do
     patch tasks_update_path(id: @task.category_id, tid: @task.id), params: {
       task: { deadline: '2021-02-20' }
     }
@@ -145,7 +179,17 @@ class TaskControllerTest < ActionDispatch::IntegrationTest
   end
 
 
-  test "3.8 should be able to update deadline if not logged in" do
+  test "3.11 should be able to update deadline if not the owner" do
+     self.login_hacker
+    patch tasks_update_path(id: @task.category_id, tid: @task.id), params: {
+      task: { deadline: '2021-02-20' }
+    }
+    assert Task.find(@task.id).deadline != '2021-02-20'
+    assert_redirected_to root_path
+  end
+
+
+  test "3.11 should be able to update deadline if not logged in" do
     sign_out :user
     patch tasks_update_path(id: @task.category_id, tid: @task.id), params: {
       task: { deadline: '2021-02-20' }
@@ -165,6 +209,7 @@ class TaskControllerTest < ActionDispatch::IntegrationTest
     assert Category.find(@category.id).tasks.length < old_tasks_count
   end
 
+
   test "4.2 should not be able to delete task if not logged in" do
     sign_out :user
     old_tasks_count = Category.find(@category.id).tasks.length
@@ -175,6 +220,19 @@ class TaskControllerTest < ActionDispatch::IntegrationTest
 
     assert Category.find(@category.id).tasks.length == old_tasks_count
     assert_redirected_to signin_new_path
+  end
+
+
+  test "4.2 should not be able to delete task if not the owner" do
+    self.login_hacker
+    old_tasks_count = Category.find(@category.id).tasks.length
+
+    assert_no_difference('Task.count', -1) do 
+      delete tasks_delete_path(id: @task.category_id, tid: @task.id)
+    end
+
+    assert Category.find(@category.id).tasks.length == old_tasks_count
+    assert_redirected_to root_path
   end
 
 end

@@ -2,13 +2,14 @@ class ApplicationController < ActionController::Base
 
   include Exceptions::JournalErrors
   rescue_from ActiveRecord::RecordNotFound, with: :notfound_error
-  rescue_from CreateJournalError, with: :create_journal_error
-  rescue_from UpdateJournalError, with: :update_journal_error
-  rescue_from CreateJournalTaskError, with: :create_journal_task_error
-  rescue_from CreateTaskError, with: :create_task_error
-  rescue_from UpdateTaskError, with: :update_task_error
+  rescue_from CreateJournalError,           with: :create_journal_error
+  rescue_from UpdateJournalError,           with: :update_journal_error
+  rescue_from CreateJournalTaskError,       with: :create_journal_task_error
+  rescue_from CreateTaskError,              with: :create_task_error
+  rescue_from UpdateTaskError,              with: :update_task_error
+  rescue_from UnauthorizedError,            with: :unauthorize_error
 
-  protect_from_forgery with: :exception, prepend: true
+  protect_from_forgery                      with: :exception, prepend: true
 
   before_action :configure_permitted_parameters, if: :devise_controller?
 
@@ -55,6 +56,10 @@ class ApplicationController < ActionController::Base
   def update_task_error(exception)
     flash.now[:alert] = exception.message
     render 'task/edit'
+  end
+
+  def unauthorize_error
+    redirect_to root_path, alert: "Unauthorized action"
   end
 
 end

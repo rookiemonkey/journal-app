@@ -14,4 +14,10 @@ class ActiveSupport::TestCase
   def destroy_nils(model, prop)
     model.where("#{prop}" => nil).each { |u| u.destroy }
   end
+
+  def login_hacker
+    sign_out :user
+    sign_in users(:user_two)
+  end
+  
 end

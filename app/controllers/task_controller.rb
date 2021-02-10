@@ -5,12 +5,14 @@ class TaskController < ApplicationController
   before_action :set_task, only: [:edit, :delete, :update, :show]
 
   def index
+    raise UnauthorizedError unless self.is_owner?
   end
 
   def new
   end
 
   def edit
+    raise UnauthorizedError unless self.is_owner?
   end
   
   def create
@@ -22,11 +24,13 @@ class TaskController < ApplicationController
   end
 
   def update
+    raise UnauthorizedError unless self.is_owner?
     raise UpdateTaskError.new('Failed to update task') unless @task.update(self.extract_params)
     redirect_to(tasks_path(@category.id), notice: "Successfully updated a task for #{@category.name}")
   end
 
   def delete
+    raise UnauthorizedError unless self.is_owner?
     @task.destroy
     redirect_to(tasks_path(@category.id), notice: "Successfully deleted a task for #{@category.name}")
   end
@@ -45,6 +49,10 @@ class TaskController < ApplicationController
 
   def extract_params
     params.require(:task).permit(:name, :description, :deadline)
+  end
+
+  def is_owner?
+    current_user.id == @category.user_id
   end
 
 end

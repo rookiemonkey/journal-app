@@ -11,4 +11,8 @@ user_one:
   last_name: last
   encrypted_password: <%= Devise::Encryptor.digest(User, '987654321') %>
 
-two: {}
+user_two:
+  email: user2@google.com
+  first_name: first_name_two
+  last_name: last_name
+  encrypted_password: <%= Devise::Encryptor.digest(User, '987654321') %>

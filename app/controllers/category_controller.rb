@@ -7,6 +7,7 @@ class CategoryController < ApplicationController
   end
 
   def edit
+    raise UnauthorizedError unless self.is_owner?
   end
 
   def create
@@ -17,12 +18,14 @@ class CategoryController < ApplicationController
   end
 
   def update
+    raise UnauthorizedError unless self.is_owner?
     @category.update(self.extract_params)
     raise UpdateJournalError.new('Failed to update journal') unless @category.valid?
     redirect_to(root_path, notice: 'Successfully updated your journal')
   end
 
   def delete
+    raise UnauthorizedError unless self.is_owner?
     @category.destroy
     redirect_to(root_path, notice: 'Successfully deleted your journal')
   end
@@ -37,6 +40,10 @@ class CategoryController < ApplicationController
 
   def extract_params
     params.require(:category).permit(:name, :description)
+  end
+
+  def is_owner?
+    current_user.id == @category.user_id
   end
 
 end

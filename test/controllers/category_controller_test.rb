@@ -35,6 +35,13 @@ class CategoryControllerTest < ActionDispatch::IntegrationTest
   end
 
 
+  test "2.3 should not get edit when not the owner" do
+    self.login_hacker
+    get categories_edit_path @category
+    assert_redirected_to root_path
+  end
+
+
   test "3.1 should delete a category" do
     assert_difference('Category.count', -1) do
       delete categories_delete_path @category
@@ -48,6 +55,15 @@ class CategoryControllerTest < ActionDispatch::IntegrationTest
       delete categories_delete_path @category
     end
     assert_redirected_to signin_new_path
+  end
+
+
+  test "3.3 should not delete a category when not the owner" do
+    self.login_hacker
+    assert_no_difference('Category.count') do
+      delete categories_delete_path @category
+    end
+    assert_redirected_to root_path
   end
 
 
@@ -146,6 +162,30 @@ class CategoryControllerTest < ActionDispatch::IntegrationTest
     
     assert Category.find(@category.id).name != 'UPDATED CATEGORY!'
     assert_redirected_to signin_new_path
+  end
+
+
+  test "5.5 edit should not be able to update a category name when not the owner" do
+    self.login_hacker
+
+    patch categories_update_path(@category), params: {
+      category: { name: 'UPDATED CATEGORY!' }
+    }
+    
+    assert Category.find(@category.id).name != 'UPDATED CATEGORY!'
+    assert_redirected_to root_path
+  end
+
+
+  test "5.6 edit should not be able to update a category description when not the owner" do
+    self.login_hacker
+    
+    patch categories_update_path(@category), params: {
+      category: { description: 'UPDATED DESCRIPTION!' }
+    }
+    
+    assert Category.find(@category.id).description != 'UPDATED DESCRIPTION!'
+    assert_redirected_to root_path
   end
 
 end
