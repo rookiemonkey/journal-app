@@ -1,0 +1,28 @@
+<%= render 'components/navigation' %>
+
+<% if current_user.present? %>
+  <%= render 'components/navigation_user' %>
+<% end %>
+
+<section class="container container-content mt-6">
+<div class="columns">
+
+  <div class="column is-6 container-left">
+    <%= image_tag :'index.svg'  %>
+  </div>
+
+  <div class="column is-6 container-right is-flex is-justify-content-center is-align-items-flex-start">
+    <h1 class="is-size-1 has-text-weight-medium">Satisfy</h1>
+    <p class="is-size-4 mb-6">
+      Organize your thoughts. Satisfy your inner self. Enjoy accomplishing your tasks eveyday!
+    </p>
+    <p>
+      <%= (link_to 'Start Now!', signup_new_path, class: 'button is-info') unless current_user.present? %>
+      <%= (link_to 'Start Now!', home_dashboard_path, class: 'button is-info') if current_user.present? %>
+    </p>
+  </div>
+
+</div>
+</section>
+
+<%= render 'components/footer' %>

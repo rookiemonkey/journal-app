@@ -11,7 +11,8 @@ Rails.application.routes.draw do
   end
 
   # HOME
-  root                                          to: 'home#home'
+  root                                          to: 'home#index'
+  get     '/dashboard',                         to: 'home#dashboard',           as: 'home_dashboard'
   get     '/task/new',                          to: 'home#new_task',            as: 'home_new_task'
   post    '/task/new',                          to: 'home#create_task',         as: 'home_create_task'
   

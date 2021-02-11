@@ -12,45 +12,45 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
 
 
   test "1.1 should get home only if logged in" do
-    get root_path
+    get home_dashboard_path
     assert_response :success
   end
 
 
   test "1.2 should be redirected when accessing home while not logged in" do
     sign_out :user
-    get root_path
+    get home_dashboard_path
     assert_redirected_to signin_new_path
   end
 
 
   test "1.3 home should have both categories and tasks instance variables" do
-    get root_path
+    get home_dashboard_path
     assert_not_nil assigns(:categories)
     assert_not_nil assigns(:tasks)
   end
 
 
   test "1.4 home should have a link to show category tasks" do
-    get root_path
+    get home_dashboard_path
     assert_select "a:match('href', ?)", tasks_path(@category)
   end
 
 
   test "1.5 home should have a link to edit a category" do
-    get root_path
+    get home_dashboard_path
     assert_select "a:match('href', ?)", categories_edit_path(@category)
   end
 
 
   test "1.6 home should have a link to delete a category" do
-    get root_path
+    get home_dashboard_path
     assert_select "a:match('href', ?)", categories_delete_path(@category)
   end
 
 
   test "1.7 home should show the category name" do
-    get root_path
+    get home_dashboard_path
     assert_match @category.name, response.body
   end
 
@@ -67,7 +67,7 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     assert for_user.length == user_categories.length
     assert all_categories.length > user_categories.length
 
-    get root_path
+    get home_dashboard_path
     assert controller.instance_variable_get(:@categories).length == user_categories.length
   end
 

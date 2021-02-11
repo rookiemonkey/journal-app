@@ -1,6 +1,9 @@
 class HomeController < ApplicationController
 
-  before_action :redirect_if_not_loggedin
+  before_action :redirect_if_not_loggedin, except: [:index]
+
+  def index
+  end
 
   def new_task
   end
@@ -13,7 +16,7 @@ class HomeController < ApplicationController
                 notice: 'Successfully created a task')
   end
 
-  def home
+  def dashboard
     @categories = Category.where(user_id: current_user.id)
     @tasks = Task.where('deadline <= ? and user_id = ?', 
                         Date.today, 
