@@ -15,9 +15,11 @@ class User < ApplicationRecord
           uniqueness: true
 
   validates :first_name,
-          presence: true
+          presence: true,
+          length: { maximum: 15 }
 
   validates :last_name,
-          presence: true
+          presence: true,
+          length: { maximum: 30 }
 
 end

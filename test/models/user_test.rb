@@ -68,4 +68,14 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user.valid?
   end
 
+  test "user should reject first_name greater than 15 chars" do
+    @user.first_name = 'a'*16
+    assert_not @user.valid?
+  end
+
+  test "user should reject last_name greater than 30 chars" do
+    @user.last_name = 'a'*31
+    assert_not @user.valid?
+  end
+
 end
