@@ -61,3 +61,18 @@ body {
   flex-direction: column;
   justify-content: space-between;
 }
+
+.maximize {
+  min-height: 540px;
+}
+
+.when-empty {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.when-empty img {
+  width: 30%;
+}

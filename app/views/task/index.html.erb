@@ -14,13 +14,25 @@
 </section>
 
 <section class="container container-content mt-6">
-<div class="tile tile-container is-ancestor">
 
-  <% @tasks.each do |task| %>
-      <%= render 'components/card_task', task: task %>
+  <% if @tasks.length.positive? %>
+    <div class="tile tile-container is-ancestor">
+      <% @tasks.each do |task| %>
+          <%= render 'components/card_task', task: task %>
+      <% end %>
+    </div>
   <% end %>
 
-</div>
+  <% unless @tasks.length.positive? %>
+    <div class="when-empty">
+      <%= image_tag :'empty.category.tasks.svg'  %>
+      <p class="is-size-4 mt-5 has-text-weight-semibold">
+        This journal has no tasks.
+        <%= link_to 'Add one now!', tasks_new_path %>
+      </p>
+    </div>
+  <% end %>
+
 </section>
 
 <%= render 'components/footer' %>

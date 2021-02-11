@@ -25,16 +25,32 @@
 
 <section class="container mt-6">
 
-  <div class="box has-background-warning-ligth has-text-dark is-size-4 has-text-weight-semibold">
-    <i class="fas fa-exclamation-circle has-text-warning mr-1"></i>
-    <%= current_user.first_name %>, these tasks requires your attention!
-  </div>
+  <% if @tasks.length.positive? %>
+    <div class="box has-background-warning-light has-text-dark is-size-4 has-text-weight-semibold">
+      <i class="fas fa-exclamation-circle has-text-warning mr-1"></i>
+      <%= current_user.first_name %>, these tasks requires your attention!
+    </div>
 
-  <div class="tile tile-container is-ancestor">
-    <% @tasks.each do |task| %>
-      <%= render 'components/card_task', task: task %>
-    <% end %>
-  </div>
+    <div class="tile tile-container is-ancestor">
+      <% @tasks.each do |task| %>
+        <%= render 'components/card_task', task: task %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <% unless @tasks.length.positive? %>
+    <div class="box has-background-success-light has-text-dark is-size-4 has-text-weight-semibold">
+      <i class="fas fa-check-circle has-text-success mr-1"></i>
+      <%= current_user.first_name %>, You are all set for today!
+    </div>
+
+    <div class="when-empty">
+      <%= image_tag :'empty.task.svg'  %>
+      <p class="is-size-4 mt-5 has-text-weight-semibold">
+        Eveything looks good!
+      </p>
+    </div>
+  <% end %>
 
 </section>
 
@@ -48,11 +64,23 @@
     Your Journals
   </div>
 
-  <div class="tile tile-container is-ancestor">
-    <% @categories.each do |category| %>
-      <%= render 'components/card_category', category: category %>
-    <% end %>
-  </div>
+  <% if @categories.length.positive? %>
+    <div class="tile tile-container is-ancestor">
+      <% @categories.each do |category| %>
+        <%= render 'components/card_category', category: category %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <% unless @categories.length.positive?  %>
+    <div class="when-empty">
+      <%= image_tag :'empty.category.svg'  %>
+      <p class="is-size-4 mt-5 has-text-weight-semibold"> 
+        Your journals is empty.
+        <%= link_to 'Start orginizing now!', categories_new_path %>
+      </p>
+    </div>
+  <% end %>
 
 </section>
 
