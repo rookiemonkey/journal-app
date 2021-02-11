@@ -1,10 +1,8 @@
 <% route = "#{params[:controller]}##{params[:action]}" %>
 
-<% if route == 'task#show' %>
-  <a href="#linktocopytoclipboard" class="button is-light action-tile-button" title="Link Task">
-    <i class="fas fa-link"></i>
-  </a>
-<% end %>
+<button class="to_clipboard_task button is-light action-tile-button" data-url="<%= tasks_show_path(id: task.category_id, tid: task.id) %>" title="Link Task">
+  <i class="fas fa-link"></i>
+</button>
 
 <% unless route == 'task#show' %>
   <%= link_to tasks_show_path(id: task.category_id, tid: task.id), class: :"button is-light action-tile-button", title: "View Task" do %>
