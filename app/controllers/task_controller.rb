@@ -7,6 +7,7 @@ class TaskController < ApplicationController
   before_action :is_owner_of_task?, only: [:edit, :delete, :update, :show]
 
   def index
+    @tasks = @category.tasks
   end
 
   def new

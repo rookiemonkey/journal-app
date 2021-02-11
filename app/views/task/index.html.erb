@@ -16,7 +16,7 @@
 <section class="container container-content mt-6">
 <div class="tile tile-container is-ancestor">
 
-  <% @category.tasks.each do |task| %>
+  <% @tasks.each do |task| %>
       <%= render 'components/card_task', task: task %>
   <% end %>
 
