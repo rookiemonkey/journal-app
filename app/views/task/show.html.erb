@@ -8,8 +8,7 @@
     <%= image_tag :'create.task.svg'  %>
     <h2 class="is-size-2 has-text-weight-medium"><%= @task.name %></h2>
     <h4>Deadline: <%= date_full_words @task.deadline %></h4>
-    <%= raw '<h2>Status: <span class="has-text-success-dark">Completed</span></h2>' if @task.completed %>
-    <%= raw '<h2>Status: <span class="has-text-warning-dark">Pending</span></h2>' unless @task.completed %>
+    <h2>Status: <%= raw task_label @task.completed %></h2>
     <div class="mt-5">
       <%= render 'components/task_buttons', task: @task %>
     </div>

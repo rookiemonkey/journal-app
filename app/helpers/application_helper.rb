@@ -36,4 +36,9 @@ module ApplicationHelper
     hash
   end
 
+  def task_label(is_completed)
+    return '<span class="has-text-success-dark">Completed</span>' if is_completed
+    return '<span class="has-text-warning-dark">Pending</span>' unless is_completed
+  end
+
 end
