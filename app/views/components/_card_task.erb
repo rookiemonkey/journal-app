@@ -14,7 +14,7 @@
       </p>
 
       <p class="subtitle is-size-6">
-        <%= task.description %>
+        <%= truncate(task.description.html_safe, length: 100) %>
       </p>
     </div>
 

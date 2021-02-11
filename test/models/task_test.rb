@@ -33,8 +33,8 @@ class TaskTest < ActiveSupport::TestCase
     assert_not @task.valid?
   end
 
-  test "5. task should reject description with 150 chars and more" do
-    @task.description = 'a'*151
+  test "5. task should reject description with 2500 chars and more" do
+    @task.description = 'a'*2501
     assert_not @task.valid?
   end
 
