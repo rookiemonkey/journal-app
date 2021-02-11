@@ -1,6 +1,9 @@
 <div class="tile tile-item is-parent is-shady">
 <article class="tile is-child notification is-white">
 
+    <span class="tile-status ">
+      <%= raw task_label task.completed %>
+    </span>
 
     <div class="tile-contents">
       <h3 class="title is-size-4">
@@ -22,6 +25,7 @@
     <div class="tile-actions">
       <%= render 'components/task_buttons', task: task %>
     </div>
+
 
 </article>
 </div>
