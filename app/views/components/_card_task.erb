@@ -1,7 +1,7 @@
 <div class="tile tile-item is-parent is-shady">
 <article class="tile is-child notification is-white">
 
-    <span class="tile-status ">
+    <span class="tile-status py-1  px-2 completed-<%= task.completed %>">
       <%= raw task_label task.completed %>
     </span>
 
@@ -13,7 +13,7 @@
 
       <p class="subtitle is-size-7 mb-3 has-text-grey-light">
         <i class="fas fa-stopwatch has-text-danger"></i>
-        deadline in <%= time_ago_in_words task.deadline %>
+        <%= date_full_words task.deadline %>
       </p>
 
       <p class="subtitle is-size-6">

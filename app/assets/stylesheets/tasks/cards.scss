@@ -3,4 +3,17 @@
   top: 0px;
   right: 0px;
   font-size: x-small !important;
+  border-radius: 15px;
+}
+
+.tile-status > .has-text-success-dark {
+  color: white !important;
+}
+
+.completed-true {
+  background-color: hsl(141, 71%, 48%) !important;
+}
+
+.completed-false {
+  background-color: hsl(48, 100%, 67%) !important;
 }
