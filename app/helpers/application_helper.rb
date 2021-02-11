@@ -30,7 +30,20 @@ module ApplicationHelper
     hash = Hash.new
 
     errors.each do |err|
-      hash[err.attribute.to_s.upcase] = err.message
+      arr = err.attribute.to_s.upcase.split('_')
+
+      field = ''
+      arr.each do |phrase|
+        
+        if field == ''
+          field = phrase
+          next
+        end
+
+        field << " #{phrase}"
+      end
+
+      hash[field] = err.message
     end
 
     hash
