@@ -1,0 +1,9 @@
+
+
+<%= @task.name %>
+<%= @task.description %>
+
+<%= 'Completed' if @task.completed %>
+<%= 'Pending' unless @task.completed %>
+
+<%= date_full_words @task.deadline %>

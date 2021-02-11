@@ -15,6 +15,9 @@ class TaskController < ApplicationController
 
   def edit
   end
+
+  def show
+  end
   
   def create
     @task = Task.new(self.extract_params)

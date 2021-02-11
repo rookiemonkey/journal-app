@@ -235,4 +235,55 @@ class TaskControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_path
   end
 
+
+  test "5.1 should get show task" do
+    get tasks_show_path(id: @task.category_id, tid: @task.id)
+    assert_response :success
+  end
+
+
+  test "5.2 should have @task instance variable on show task" do
+    get tasks_show_path(id: @task.category_id, tid: @task.id)
+    assert_not_nil assigns(:task)
+  end
+
+
+  test "5.3 should show the task name" do
+    get tasks_show_path(id: @task.category_id, tid: @task.id)
+    assert_match @task.name, response.body
+  end
+
+
+  test "5.3 should show the task description" do
+    get tasks_show_path(id: @task.category_id, tid: @task.id)
+    assert_match @task.description, response.body
+  end
+
+
+  test "5.4 should show the task description" do
+    get tasks_show_path(id: @task.category_id, tid: @task.id)
+    assert_match @task.description, response.body
+  end
+
+
+  test "5.5 should show the task status pending" do
+    get tasks_show_path(id: @task.category_id, tid: @task.id)
+    assert_match 'Pending', response.body
+  end
+
+
+  test "5.5 should show the task status completed" do
+    @task.completed = true
+    @task.save
+    get tasks_show_path(id: @task.category_id, tid: @task.id)
+    assert_match 'Completed', response.body
+  end
+
+
+  test "5.5 should show the task deadline" do
+    # format should be based on date_full_words on application helpers
+    get tasks_show_path(id: @task.category_id, tid: @task.id)
+    assert_match @task.deadline.strftime("%A, %d %b %Y"), response.body
+  end
+
 end
