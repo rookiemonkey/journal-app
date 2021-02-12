@@ -6,10 +6,7 @@
     <link rel="icon" href="favicon.svg">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/f5d315bff2.js" crossorigin="anonymous"></script>
+    <%= javascript_pack_tag 'fontawesome', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
