@@ -64,7 +64,14 @@ class TaskControllerTest < ActionDispatch::IntegrationTest
   end
 
 
-  test "2.3 should be able to create a task" do
+  test "2.3 should not get new if there are no journals on the account" do
+    users(:user_one).categories.delete_all
+    get home_new_task_path
+    assert_redirected_to categories_new_path
+  end
+
+
+  test "2.4 should be able to create a task" do
     old_tasks_count = Category.find(@category.id).tasks.length
 
     assert_difference('Task.count', 1) do
@@ -77,7 +84,7 @@ class TaskControllerTest < ActionDispatch::IntegrationTest
   end
 
 
-  test "2.4 should not be able to create a task if not logged in" do
+  test "2.5 should not be able to create a task if not logged in" do
     sign_out :user
     old_tasks_count = Category.find(@category.id).tasks.length
 

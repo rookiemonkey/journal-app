@@ -6,6 +6,7 @@ class HomeController < ApplicationController
   end
 
   def new_task
+    redirect_to(categories_new_path, alert: "Please create a journal first") if current_user.categories.length.zero?
   end
 
   def create_task
