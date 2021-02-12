@@ -8,6 +8,8 @@ class TaskController < ApplicationController
 
   def index
     @tasks = @category.tasks
+    @count_completed = @tasks.count { |t| t.completed }
+    @count_not_completed = @tasks.count { |t| !t.completed }
   end
 
   def new

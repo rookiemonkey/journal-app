@@ -9,8 +9,14 @@
       </h3>
 
       <p class="subtitle is-size-7 mb-3 has-text-grey-light">
-        <i class="fas fa-cogs"></i>
-        <%= category.tasks.length %> Tasks
+        <span class="mr-2">
+          <i class="fas fa-cogs"></i>
+          <%= category.tasks.length %> Tasks
+        </span>
+        <span class="mr-2 has-text-success">
+          <i class="fas fa-check-circle"></i>
+          <%= statistics[:completed] %> Completed
+        </span>
       </p>
 
       <p class="subtitle is-size-6 has-text-light">

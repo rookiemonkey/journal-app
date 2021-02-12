@@ -4,15 +4,21 @@
   <div class="box is-flex is-justify-content-space-between is-align-content-center ">
     <h2 class="has-text-black-bis is-size-4 has-text-weight-semibold"><%= @category.name %></h2>
 
-    <div>
-      <%= link_to tasks_new_path, class: "button is-info" do %>
-        <i class="fas fa-plus mr-3"></i> Task
-      <% end %>
+    <div class="task-progress-container is-flex">
+      <div class="mr-3 progress-container">
+        <%= @count_completed %> / <%= @count_not_completed %> tasks are completed!
+        <progress class="progress is-success journal-progress" value="<%= @count_completed %>" max="<%= @tasks.length %>"></progress>
+      </div>
+      <div>
+        <%= link_to tasks_new_path, class: "button is-info" do %>
+          <i class="fas fa-plus mr-3"></i> Task
+        <% end %>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="container container-content mt-6">
+<section class="container container-content mt-4">
 
   <% if @tasks.length.positive? %>
     <div class="tile tile-container is-ancestor">

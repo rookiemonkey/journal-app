@@ -1,16 +1,28 @@
 <%= render 'components/navigation' %>
+<% count = @statistics[:count] %>
+<% count_not_completed = count[:completed] + count[:not_completed] %>
+<% count_categories = @statistics[:categories] %>
 
 <section class="container container-content mt-3">
 
-  <div class="box has-background-info-dark has-text-white is-size-4 has-text-weight-semibold">
-    <i class="fas fa-book-reader mr-1"></i>
-    Your Journals
+  <div class="box has-background-info-dark has-text-white has-text-weight-semibold is-flex is-align-items-center is-justify-content-space-between">
+    <div class="is-size-4">
+      <i class="fas fa-book-reader mr-1"></i>
+      Your Journals
+    </div>
+    <div class="categories-progress-container">
+      <%= count[:completed] %> / <%= count_not_completed %> tasks are completed!
+      <progress class="progress is-success journal-progress" value="<%= count[:completed] %>" max="<%= count_not_completed %>"></progress>
+    </div>
   </div>
 
   <% if @categories.length.positive? %>
     <div class="tile tile-container is-ancestor">
       <% @categories.each do |category| %>
-        <%= render 'components/card_category', category: category %>
+        <%= render 'components/card_category', 
+            category: category, 
+            statistics: count_categories[category.id] 
+        %>
       <% end %>
     </div>
   <% end %>
