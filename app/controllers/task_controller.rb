@@ -1,9 +1,9 @@
 class TaskController < ApplicationController
 
   before_action :redirect_if_not_loggedin
-  before_action :set_category, only: [:index, :create, :delete, :update, :edit]
+  before_action :set_category, only: [:index, :new, :create, :delete, :update, :edit]
   before_action :set_task, only: [:edit, :delete, :update, :show]
-  before_action :is_owner_of_category?, only: [:index, :create, :edit, :update, :delete]
+  before_action :is_owner_of_category?, only: [:index, :new, :create, :edit, :update, :delete]
   before_action :is_owner_of_task?, only: [:edit, :delete, :update, :show]
 
   def index
