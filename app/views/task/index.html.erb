@@ -1,15 +1,14 @@
 <%= render 'components/navigation' %>
 
-<section class="container is-flex is-justify-content-space-between is-align-content-center mt-3">
-  <h2 class="has-text-white is-size-4 has-text-weight-medium"><%= @category.name %></h2>
+<section class="container mt-3">
+  <div class="box is-flex is-justify-content-space-between is-align-content-center ">
+    <h2 class="has-text-black-bis is-size-4 has-text-weight-semibold"><%= @category.name %></h2>
 
-  <div>
-    <%= link_to home_dashboard_path, class: "button is-light ml-1" do %>
-      <i class="fas fa-clipboard-list mr-3"></i> Dashboard
-    <% end %>
-    <%= link_to tasks_new_path, class: "button is-light" do %>
-      <i class="fas fa-plus mr-3"></i> Task
-    <% end %>
+    <div>
+      <%= link_to tasks_new_path, class: "button is-info" do %>
+        <i class="fas fa-plus mr-3"></i> Task
+      <% end %>
+    </div>
   </div>
 </section>
 
