@@ -1,7 +1,15 @@
+#toast-container > div {
+  top: 10px;
+  opacity: 1 !important;
+  box-shadow: rgba(0, 0, 0, .75) 0 5px 5px !important;
+}
+
 .toast-error {
+  opacity: 1;
   background-color: #f14668 !important;
 }
 
 .toast-success {
+  opacity: 1;
   background-color: #48c78e !important;
 }
