@@ -71,7 +71,44 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     assert controller.instance_variable_get(:@categories).length == user_categories.length
   end
 
+
+  test "1.9 home should only show overdue/due today incomplete tasks for the current user" do
+    self.generate_task('Ten')
+    self.generate_task('Nine')
+    now = Time.now
+
+    tasks(:task_overdue).category_id = @category.id
+    tasks(:task_overdue).user_id = users(:user_one).id
+    tasks(:task_overdue).save
+
+    Task.create(name: 'Task One', 
+                      description: ('b'*50), 
+                      deadline: "#{now.year}-#{now.month}-#{now.day}",
+                      user_id: users(:user_one).id,
+                      category_id: @category.id)
+
+    task_today_two = Task.create(name: 'Task Two', 
+                      description: ('b'*50), 
+                      deadline: "#{now.year}-#{now.month}-#{now.day}",
+                      user_id: users(:user_one).id,
+                      category_id: @category.id)
+
+    task_today_two.completed = true
+    task_today_two.save
+
+    user_tasks = Task.near_deadline.where(user_id: users(:user_one).id);
+    all_tasks = Task.all
+
+    for_user = all_tasks.select { |c| c.user_id == users(:user_one).id }
+
+    assert for_user.length >= user_tasks.length
+    assert all_tasks.length > user_tasks.length
+
+    get home_dashboard_path
+    assert controller.instance_variable_get(:@tasks).length == user_tasks.length
+  end
   
+
   test "2.1 home_new_task_path should show a form" do
     get home_new_task_path
     assert_response :success
@@ -125,7 +162,18 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
   def generate_category(name)
     Category.create(name: "Category #{name}", 
                     description: ('a'*20),
-                    user_id: 98989898898989898989)
+                    user_id: users(:user_two).id)
+  end
+
+  def generate_task(name)
+    now = Time.now
+    category = self.generate_category(name)
+
+    task = Task.create(name: "Task #{name}", 
+                description: ('a'*20),
+                deadline: "#{now.year}-#{now.month}-#{now.day}",
+                user_id: category.user_id,
+                category_id: category.id)
   end
 
 end

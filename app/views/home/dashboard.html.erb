@@ -1,6 +1,33 @@
 <%= render 'components/navigation' %>
 
-<section class="container mt-3">
+<section class="container container-content mt-3">
+
+  <div class="box has-background-info-dark has-text-white is-size-4 has-text-weight-semibold">
+    <i class="fas fa-book-reader mr-1"></i>
+    Your Journals
+  </div>
+
+  <% if @categories.length.positive? %>
+    <div class="tile tile-container is-ancestor">
+      <% @categories.each do |category| %>
+        <%= render 'components/card_category', category: category %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <% unless @categories.length.positive?  %>
+    <div class="when-empty">
+      <%= image_tag :'empty.category.svg'  %>
+      <p class="is-size-4 mt-5 has-text-weight-semibold"> 
+        Your journals is empty.
+        <%= link_to 'Start orginizing now!', categories_new_path %>
+      </p>
+    </div>
+  <% end %>
+
+</section>
+
+<section class="container mt-6">
 
   <% if @tasks.length.positive? %>
     <div class="box has-background-warning-light has-text-dark is-size-4 has-text-weight-semibold">
@@ -25,36 +52,6 @@
       <%= image_tag :'empty.task.svg'  %>
       <p class="is-size-4 mt-5 has-text-weight-semibold">
         Eveything looks good!
-      </p>
-    </div>
-  <% end %>
-
-</section>
-
-
-
-
-<section class="container container-content mt-6">
-
-  <div class="box has-background-info-dark has-text-white is-size-4 has-text-weight-semibold">
-    <i class="fas fa-book-reader mr-1"></i>
-    Your Journals
-  </div>
-
-  <% if @categories.length.positive? %>
-    <div class="tile tile-container is-ancestor">
-      <% @categories.each do |category| %>
-        <%= render 'components/card_category', category: category %>
-      <% end %>
-    </div>
-  <% end %>
-
-  <% unless @categories.length.positive?  %>
-    <div class="when-empty">
-      <%= image_tag :'empty.category.svg'  %>
-      <p class="is-size-4 mt-5 has-text-weight-semibold"> 
-        Your journals is empty.
-        <%= link_to 'Start orginizing now!', categories_new_path %>
       </p>
     </div>
   <% end %>

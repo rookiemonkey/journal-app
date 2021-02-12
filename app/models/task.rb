@@ -4,6 +4,8 @@ class Task < ApplicationRecord
   belongs_to :category
   validate :deadline_not_past
 
+  scope :near_deadline, -> { where("completed = false and deadline <= '#{Date.today}'") }
+
   validates :name,
             presence: true,
             length: { maximum: 20 }
@@ -19,7 +21,6 @@ class Task < ApplicationRecord
   private
 
   # deadline is an instance of ActiveSupport::TimeWithZone
-  # https://api.rubyonrails.org/v6.1.0/classes/ActiveSupport/TimeWithZone.html
   def deadline_not_past
     return if (deadline.nil? or deadline.today?)
 

@@ -19,9 +19,7 @@ class HomeController < ApplicationController
 
   def dashboard
     @categories = Category.where(user_id: current_user.id)
-    @tasks = Task.where('deadline <= ? and user_id = ?', 
-                        Date.today, 
-                        current_user.id)
+    @tasks = Task.near_deadline.where(user_id: current_user.id)
   end
 
 
