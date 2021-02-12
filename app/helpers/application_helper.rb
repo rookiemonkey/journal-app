@@ -49,9 +49,22 @@ module ApplicationHelper
     hash
   end
 
-  def task_label(is_completed)
-    return '<span class="has-text-success">Completed</span>' if is_completed
-    return '<span class="has-text-warning">Pending</span>' unless is_completed
+  def task_label(task)
+    status = :''
+    message = :''
+
+    (status = :'success' and message = :'Completed') if task.completed
+    (status = :'danger' and message = :'Overdue!') if task.deadline.past? and !task.completed
+    (status = :'warning' and message = :'Due Today!') if task.deadline.today? and !task.completed
+    (status = :'light' and message = :'Pending') if task.deadline.future? and !task.completed
+
+    html = <<-HTML
+      <span class="tile-status py-1 px-2 completed-#{status}">
+        <span class="has-text-#{status}">#{message}</span>
+      </span>
+    HTML
+
+    { html: html, message: message, status: status }
   end
 
 end

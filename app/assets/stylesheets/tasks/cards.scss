@@ -10,10 +10,18 @@
   color: white !important;
 }
 
-.completed-true {
+.completed-success {
   border: 2px solid hsl(141, 71%, 48%) !important;
 }
 
-.completed-false {
+.completed-warning {
   border: 2px solid hsl(48, 100%, 67%) !important;
+}
+
+.completed-danger {
+  border: 2px solid #f14668 !important;
+}
+
+.completed-light {
+  border: 2px solid whitesmoke !important;
 }

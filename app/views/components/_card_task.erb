@@ -1,11 +1,9 @@
 <div class="tile tile-item is-parent is-shady">
 <article class="tile is-child notification is-white">
 
-    <span class="tile-status py-1 px-2 completed-<%= task.completed %>">
-      <%= raw task_label task.completed %>
-    </span>
+    <%= raw task_label(task)[:html] %>
 
-    <div class="tile-contents">
+    <div class="tile-contents mt-3">
       <h3 class="title is-size-4 has-text-primary">
         <i class="fas fa-map-pin mr-1"></i> 
         <%= task.name %>
@@ -13,7 +11,7 @@
 
       <p class="subtitle is-size-7 mb-3 has-text-grey-light">
         <i class="fas fa-stopwatch has-text-danger"></i>
-        <%= date_full_words task.deadline %>
+        <%= date_full_words(task.deadline) %>
       </p>
 
       <p class="subtitle is-size-6 has-text-light">
