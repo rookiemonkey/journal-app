@@ -11,7 +11,7 @@ html {
 }
 
 body {
-  background-image: url('wave.svg');
+  background-image: url(<%= asset_path 'wave.svg' %>);
   background-repeat: no-repeat;
   color: #ececec;
   font-family: 'Poppins', sans-serif !important;
@@ -84,8 +84,8 @@ body {
 }
 
 .is-shady:hover {
-  box-shadow: 0 10px 16px rgba(0, 0, 0, .13), 
-              0 6px 6px rgba(0, 0, 0, .19);
+  box-shadow: 0 10px 16px rgba(0, 0, 0, .13),
+    0 6px 6px rgba(0, 0, 0, .19);
 }
 
 .is-child {
@@ -126,13 +126,14 @@ div.field div.control input:focus {
   box-shadow: none !important;
 }
 
-.control.has-icons-right .input:focus ~ .icon {
+.control.has-icons-right .input:focus~.icon {
   color: white;
 }
 
 .categories-progress-container {
   width: 50%;
 }
+
 .task-progress-container {
   width: 50%;
 }
