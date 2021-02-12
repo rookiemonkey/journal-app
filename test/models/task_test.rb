@@ -14,6 +14,11 @@ class TaskTest < ActiveSupport::TestCase
                         deadline: "#{now.year}-#{now.month}-#{now.day}", 
                         category_id: @category.id,
                         user_id: users(:user_one).id)
+
+    @task_overdue = tasks(:task_overdue)
+    @task_overdue.user_id = users(:user_one).id
+    @task_overdue.category_id = @category.id
+    @task_overdue.save
   end
 
   
@@ -52,7 +57,7 @@ class TaskTest < ActiveSupport::TestCase
   end
 
 
-  test "8. task should reject past dated deadline for new records" do
+  test "8. task should reject past dated deadline for new tasks" do
     now = Time.now
 
     task = Task.create(name: "Task One", 
@@ -65,34 +70,30 @@ class TaskTest < ActiveSupport::TestCase
   end
 
 
-  test "10. task should reject past dated deadline for old records only if deadline is changed" do
+  test "10. task should reject past dated deadline for old tasks only if deadline is changed" do
     now = Time.now
     @task.deadline = "#{now.year-1}-#{now.month}-#{now.day}"
-    @task.save
     assert_not @task.valid?
   end
 
 
-  test "11. task should accept past dated deadline for old records only if deadline is not changed" do
-    @task.name = "Did not updated"
-    @task.description = "This should be a ok on the model layer"
-    @task.save
+  test "11. task should accept past dated deadline for old tasks(w/ past deadline) only if deadline is not changed" do
+    @task_overdue.name = "ok deadline"
+    @task_overdue.description = "This should be a ok on the model layer"
+    assert @task_overdue.valid?
+  end
+
+
+  test "12. task should accept past dated deadline for old tasks(w/ past deadline) only if deadline is not changed (pt2)" do
+    @task_overdue.completed = true
     assert @task.valid?
   end
 
 
-  test "12. task should accept past dated deadline for old records only if deadline is not changed (pt2)" do
-    @task.completed = true
-    @task.save
-    assert @task.valid?
-  end
-
-
-  test "12. task should accept past dated deadline for old records only if deadline is not changed (pt3)" do
-    @task.completed = true
-    @task.save
-    @task.completed = false
-    @task.save
+  test "12. task should accept past dated deadline for old tasks(w/ past deadline) only if deadline is not changed (pt3)" do
+    @task_overdue.completed = true
+    @task_overdue.save
+    @task_overdue.completed = false
     assert @task.valid?
   end
 
