@@ -15,10 +15,10 @@
       </p>
 
       <p class="subtitle is-size-6 has-text-light">
-        <%= truncate(task.description.html_safe, length: 100) %>
+        <%= truncate(strip_tags(task.description.to_s), length: 100) %>
       </p>
     </div>
-
+    
 
     <div class="tile-actions">
       <%= render 'components/task_buttons', task: task %>

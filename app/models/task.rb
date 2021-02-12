@@ -2,6 +2,7 @@ class Task < ApplicationRecord
 
   belongs_to :user
   belongs_to :category
+  has_rich_text :description
   validate :deadline_not_past
 
   scope :near_deadline, -> { where("completed = false and deadline <= '#{Date.today}'") }
