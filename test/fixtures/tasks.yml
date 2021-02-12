@@ -6,7 +6,6 @@
 #
 task_overdue:
   name: "Task Ulit"
-  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vel lobortis quam. Nulla interdum tellus id urna dapibus, consequat bibendum felis euismod. Lorem ipsum dolor sit amet,"
   deadline: "2020-02-11 00:00:00.000000000 +0000"
   category_id: 0
   user_id: 0

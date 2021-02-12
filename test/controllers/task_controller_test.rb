@@ -55,7 +55,7 @@ class TaskControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "input:match('name', ?)", 'name'
     assert_select "input:match('name', ?)", 'deadline'
-    assert_select "textarea:match('name', ?)", 'description'
+    assert_select "input:match('name', ?)", 'description'
   end
 
 
@@ -116,7 +116,7 @@ class TaskControllerTest < ActionDispatch::IntegrationTest
     assert_not_nil assigns(:task)
     assert_select "input:match('name', ?)", 'name'
     assert_select "input:match('name', ?)", 'deadline'
-    assert_select "textarea:match('name', ?)", 'description'
+    assert_select "input:match('name', ?)", 'description'
   end
 
 
@@ -164,9 +164,13 @@ class TaskControllerTest < ActionDispatch::IntegrationTest
 
   test "3.7 should be able to update task description" do
     patch tasks_update_path(id: @task.category_id, tid: @task.id), params: {
-      task: { description: 'UPDATED DESCRIPTION!' }
+      task: { description: '<p>UPDATED DESCRIPTION!</p' }
     }
-    assert Task.find(@task.id).description == 'UPDATED DESCRIPTION!'
+
+    assert Task.find(@task.id).description.to_s == "<div class=\"trix-content\">\n" +
+                                                    "  <p>UPDATED DESCRIPTION!</p>\n" +
+                                                    "</div>\n"
+
   end
 
 
@@ -275,13 +279,13 @@ class TaskControllerTest < ActionDispatch::IntegrationTest
 
   test "5.3 should show the task description" do
     get tasks_show_path(id: @task.category_id, tid: @task.id)
-    assert_match @task.description, response.body
+    assert_match @task.description.to_s, response.body
   end
 
 
   test "5.4 should show the task description" do
     get tasks_show_path(id: @task.category_id, tid: @task.id)
-    assert_match @task.description, response.body
+    assert_match @task.description.to_s, response.body
   end
 
 
