@@ -39,6 +39,11 @@ a.navbar-item.disable-hover:hover {
   color: $orange-dark;
 }
 
+a.navbar-item.has-text-primary-light.title-text:hover {
+  color: #dbdbdb !important;
+  background-color: transparent !important;
+}
+
 div.dropdown div.dropdown-trigger button {
   background-color: transparent;
   border: none;
