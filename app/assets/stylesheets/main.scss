@@ -1,14 +1,10 @@
-$info: #53354a;
-$orange-blue: #53354a;
-$orange-dark: #a64942;
-$orange: #ff7844;
+@import './variables.scss';
+@import 'bulma/bulma';
+@import 'toastr/build/toastr.min';
 
 ::placeholder {
   color: rgba($color: white, $alpha: 0.5) !important
 }
-
-@import 'bulma/bulma';
-@import 'toastr/build/toastr.min';
 
 html {
   background-color: #1b1f3a;

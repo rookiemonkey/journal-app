@@ -1,29 +1,51 @@
-<section class="hero banner-custom">
-<div class="hero-body">
-<div class="columns">
-<div class="column is-12">
-<div class="container content">
+<nav class="navbar">
+<div class="container">
 
-  <h1 class="title title-custom has-text-primary-light">
-    <span class="title title-brand has-text-primary-light">
-        <%= image_tag asset_path('brand.svg'), class: "title-icon mr-3" %>
-        <%= link_to 'Satisfy', root_path, class: "title has-text-primary-light has-text-weight-bold" %>
-    </span>
-    <span>
-      <span>
-        <i class="far fa-calendar-alt"></i> <%= date_full_words Time.now %>
+    <div class="navbar-brand is-flex is-align-content-center">
+        <%= image_tag asset_path('brand.svg'), class: "navbar-item title-icon" %>
+        <%= link_to 'Satisfy', root_path, class: "navbar-item has-text-primary-light has-text-weight-bold is-size-3" %>
+    </div>
+
+    <div id="navbarMenu" class="navbar-menu">
+    <div class="navbar-end">
+      <span class="navbar-item has-text-light is-flex is-align-items-center has-text-weight-semibold ">
+        <i class="far fa-calendar-alt mr-3"></i> <%= date_full_words Time.now %>
       </span>
 
       <% unless current_user.nil? %>
-        <%= link_to signout_path, method: :delete, class: "button is-warning" do %>
-            <i class="fas fa-sign-out-alt mr-3"></i> Signout
+        <%= link_to home_dashboard_path, class: "navbar-item has-text-light" do %>
+          <i class="fas fa-clipboard-list mr-3"></i> Dashboard
         <% end %>
-      <% end %>
-    <span>
-  </h1>
+        <%= link_to categories_new_path, class: "navbar-item has-text-light" do %>
+          <i class="fas fa-plus mr-3"></i> Journal
+        <% end %>
+        <%= link_to home_new_task_path, class: "navbar-item has-text-light" do %>
+          <i class="fas fa-plus mr-3"></i> Task
+        <% end %>
 
+        <div class="dropdown navbar-item is-hoverable">
+          <div class="dropdown-trigger">
+              <button class="button is-size-5 has-text-weight-semibold has-text-light" aria-haspopup="true" aria-controls="dropdown-menu4">
+                  <%= image_tag asset_path('avatar.svg'), class: "image is-24x24 is-rounded mr-2" %>
+                  <%= current_user.first_name %>
+              </button>
+          </div>
+          <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+              <div class="dropdown-content">
+              <div class="dropdown-item">
+
+                <%= link_to signout_path, method: :delete, class: "navbar-item disable-hover" do %>
+                    <i class="fas fa-sign-out-alt mr-3"></i> Signout
+                <% end %>
+                  
+              </div>
+              </div>
+          </div>
+        </div>
+      <% end %>
+      
+    </div>
+    </div>
+    
 </div>
-</div>
-</div>
-</div>
-</section>
+</nav>

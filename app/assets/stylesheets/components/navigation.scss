@@ -1,6 +1,14 @@
+@import './variables.scss';
+
+nav.navbar {
+  background-color: transparent !important;
+  height: 6rem !important;
+  box-shadow: none !important;
+}
+
 .title-icon {
-  width: 30px;
-  height: 30px;
+  width: 60px;
+  height: 100%;
 }
 
 .title-custom {
@@ -16,4 +24,26 @@
   margin-bottom: 0px !important;
   display: flex;
   align-items: center;
+}
+
+a.navbar-item {
+  transition: background-color 250ms ease-in-out;
+}
+
+a.navbar-item:hover {
+  background-color: darken($color: $orange-dark, $amount: 5) !important;
+}
+
+a.navbar-item.disable-hover:hover {
+  background-color: transparent !important;
+  color: $orange-dark;
+}
+
+div.dropdown div.dropdown-trigger button {
+  background-color: transparent;
+  border: none;
+}
+
+#dropdown-menu4 {
+  left: -18px !important;
 }
