@@ -1,19 +1,19 @@
 <% route = "#{params[:controller]}##{params[:action]}" %>
 
-<button class="to_clipboard_task button is-light action-tile-button" data-url="<%= tasks_show_path(id: task.category_id, tid: task.id) %>" title="Link Task">
+<button class="to_clipboard_task button is-light action-tile-button has-text-link" data-url="<%= tasks_show_path(id: task.category_id, tid: task.id) %>" title="Link Task">
   <i class="fas fa-link"></i>
 </button>
 
 <% unless route == 'task#show' %>
   <%= link_to tasks_show_path(id: task.category_id, tid: task.id), class: :"button is-light action-tile-button", title: "View Task" do %>
-      <i class="fas fa-book-reader"></i>
+      <i class="fas fa-book-reader has-text-light"></i>
   <% end %>
 <% end %>
 
-<%= link_to tasks_edit_path(id: task.category_id, tid: task.id), class: :"button is-warning is-light action-tile-button", title: "Edit Task" do %>
+<%= link_to tasks_edit_path(id: task.category_id, tid: task.id), class: :"button is-warning is-light has-text-warning action-tile-button", title: "Edit Task" do %>
     <i class="fas fa-edit"></i>
 <% end %>
 
-<%= link_to tasks_delete_path(id: task.category_id, tid: task.id), method: :delete, class: :"button is-danger is-light action-tile-button", title: "Delete Task", data: { confirm: "Are you sure you want to delete #{task.name}?" } do %>
+<%= link_to tasks_delete_path(id: task.category_id, tid: task.id), method: :delete, class: :"button is-danger is-light has-text-danger action-tile-button", title: "Delete Task", data: { confirm: "Are you sure you want to delete #{task.name}?" } do %>
     <i class="far fa-trash-alt"></i>
 <% end %>

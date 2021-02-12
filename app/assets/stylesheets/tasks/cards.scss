@@ -11,9 +11,9 @@
 }
 
 .completed-true {
-  background-color: hsl(141, 71%, 48%) !important;
+  border: 2px solid hsl(141, 71%, 48%) !important;
 }
 
 .completed-false {
-  background-color: hsl(48, 100%, 67%) !important;
+  border: 2px solid hsl(48, 100%, 67%) !important;
 }

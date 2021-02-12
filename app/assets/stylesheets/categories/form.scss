@@ -9,6 +9,10 @@
   flex-direction: column;
 }
 
+.container-left {
+  align-items: flex-start !important;
+}
+
 .container-left img,
 .container-right form,
 .container-right .container-errors  {

@@ -1,13 +1,24 @@
+$info: #53354a;
+$orange-blue: #53354a;
+$orange-dark: #a64942;
+$orange: #ff7844;
+
+::placeholder {
+  color: rgba($color: white, $alpha: 0.5) !important
+}
+
 @import 'bulma/bulma';
 @import 'toastr/build/toastr.min';
 
 html {
-  background-color: #EFF3F4;
+  background-color: #1b1f3a;
 }
 
 body {
   background-image: url('wave.svg');
   background-repeat: no-repeat;
+  color: #ececec;
+  font-family: 'Poppins', sans-serif !important;
 }
 
 .container-content {
@@ -22,6 +33,11 @@ body {
 .tile-item {
   cursor: pointer;
   min-height: 250px !important;
+}
+
+.tile-item,
+.tile-item .is-child {
+  background-color: $orange-blue !important;
 }
 
 .tile-actions {
@@ -39,6 +55,26 @@ body {
 
 .notification {
   padding: 1.25rem !important;
+}
+
+.is-secondary {
+  background-color: transparent;
+  border-color: $info;
+  color: white;
+}
+
+.is-secondary:focus {
+  border-color: none !important;
+  box-shadow: none !important;
+}
+
+.is-secondary:hover {
+  color: $info !important;
+  border-color: transparent;
+}
+
+.has-text-primary {
+  color: $orange !important;
 }
 
 .is-shady {
@@ -62,6 +98,10 @@ body {
   justify-content: space-between;
 }
 
+.has-background-info-dark {
+  background-color: $orange !important
+}
+
 .maximize {
   min-height: 540px;
 }
@@ -75,4 +115,105 @@ body {
 
 .when-empty img {
   width: 30%;
+}
+
+div.field div.control input,
+div.field div.control select,
+div.field div.control textarea {
+  background-color: $info;
+  border-color: $info;
+  color: white;
+}
+
+div.field div.control input:focus {
+  border-color: none !important;
+  box-shadow: none !important;
+}
+
+.control.has-icons-right .input:focus ~ .icon {
+  color: white;
+}
+
+.footer__wave {
+  display: block;
+  width: 100%;
+  height: 100px;
+  max-height: 100px;
+  margin: 0;
+  bottom: 100;
+  position: absolute;
+  left: 0px;
+  float: left;
+}
+
+.parallax1>use {
+  animation: move1 10s linear infinite
+}
+
+.parallax1>use:nth-child(1) {
+  animation-delay: -2s
+}
+
+.parallax2>use {
+  animation: move2 8s linear infinite
+}
+
+.parallax2>use:nth-child(1) {
+  animation-delay: -2s
+}
+
+.parallax3>use {
+  animation: move3 6s linear infinite
+}
+
+.parallax3>use:nth-child(1) {
+  animation-delay: -2s
+}
+
+.parallax4>use {
+  animation: move4 4s linear infinite
+}
+
+.parallax4>use:nth-child(1) {
+  animation-delay: -2s
+}
+
+@keyframes move1 {
+  0% {
+    transform: translate(85px, 0%)
+  }
+
+  100% {
+    transform: translate(-90px, 0%)
+  }
+}
+
+@keyframes move2 {
+  0% {
+    transform: translate(-90px, 0%)
+  }
+
+  100% {
+    transform: translate(85px, 0%)
+  }
+}
+
+@keyframes move3 {
+  0% {
+    transform: translate(85px, 0%)
+  }
+
+  100% {
+    transform: translate(-90px, 0%)
+  }
+}
+
+@keyframes move4 {
+  0% {
+    transform: translate(-90px, 0%)
+  }
+
+  100% {
+    transform: translate(85px, 0%)
+  }
 }

@@ -15,28 +15,28 @@
 
       <div class="field">
       <div class="control"> 
-        <%= f.label :'First Name' %><br />
+        <%= f.label :'First Name', class: "has-text-weight-bold" %><br />
         <%= f.text_field :first_name, class: "input", autofocus: true, autocomplete: "off" %>
       </div>
       </div>
 
       <div class="field">
       <div class="control">
-        <%= f.label :'Last Name' %><br />
+        <%= f.label :'Last Name', class: "has-text-weight-bold" %><br />
         <%= f.text_field :last_name, class: "input", autofocus: true, autocomplete: "off" %>
       </div>
       </div>
 
       <div class="field">
       <div class="control">
-        <%= f.label :email %><br />
+        <%= f.label :email, class: "has-text-weight-bold" %><br />
         <%= f.email_field :email, class: "input", autofocus: true, autocomplete: "off" %>
       </div>
       </div>
 
       <div class="field">
       <div class="control">
-        <%= f.label :password %>
+        <%= f.label :password, class: "has-text-weight-bold" %>
         <% if @minimum_password_length %>
         <em>(<%= @minimum_password_length %> characters minimum)</em>
         <% end %><br />
@@ -46,7 +46,7 @@
 
       <div class="field">
       <div class="control">
-        <%= f.label :password_confirmation %><br />
+        <%= f.label :password_confirmation, class: "has-text-weight-bold" %><br />
         <%= f.password_field :password_confirmation, class: "input",  autocomplete: "off" %>
       </div>
       </div>

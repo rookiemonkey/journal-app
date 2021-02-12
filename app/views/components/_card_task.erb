@@ -1,13 +1,13 @@
 <div class="tile tile-item is-parent is-shady">
 <article class="tile is-child notification is-white">
 
-    <span class="tile-status py-1  px-2 completed-<%= task.completed %>">
+    <span class="tile-status py-1 px-2 completed-<%= task.completed %>">
       <%= raw task_label task.completed %>
     </span>
 
     <div class="tile-contents">
-      <h3 class="title is-size-4">
-        <i class="fas fa-map-pin mr-1 has-text-info"></i> 
+      <h3 class="title is-size-4 has-text-primary">
+        <i class="fas fa-map-pin mr-1"></i> 
         <%= task.name %>
       </h3>
 
@@ -16,7 +16,7 @@
         <%= date_full_words task.deadline %>
       </p>
 
-      <p class="subtitle is-size-6">
+      <p class="subtitle is-size-6 has-text-light">
         <%= truncate(task.description.html_safe, length: 100) %>
       </p>
     </div>
