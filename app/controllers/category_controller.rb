@@ -14,19 +14,19 @@ class CategoryController < ApplicationController
     @category = Category.create(self.extract_params)
     @category.user_id = current_user.id
     raise CreateJournalError unless @category.save
-    redirect_to(root_path, 
+    redirect_to(home_dashboard_path, 
                 notice: 'Successfully created your journal')
   end
 
   def update
     raise UpdateJournalError unless @category.update(self.extract_params)
-    redirect_to(root_path,
+    redirect_to(home_dashboard_path,
                 notice: 'Successfully updated your journal')
   end
 
   def delete
     @category.destroy
-    redirect_to(root_path, 
+    redirect_to(home_dashboard_path, 
                 notice: 'Successfully deleted your journal')
   end
 

@@ -75,7 +75,7 @@ class CategoryControllerTest < ActionDispatch::IntegrationTest
       } } 
     end
 
-    assert_redirected_to root_path
+    assert_redirected_to home_dashboard_path
   end
 
 
@@ -127,7 +127,7 @@ class CategoryControllerTest < ActionDispatch::IntegrationTest
     }
     
     assert Category.find(@category.id).name == 'UPDATED CATEGORY!'
-    assert_redirected_to root_path
+    assert_redirected_to home_dashboard_path
   end
 
 
@@ -137,7 +137,7 @@ class CategoryControllerTest < ActionDispatch::IntegrationTest
     }
     
     assert Category.find(@category.id).description == 'UPDATED DESCRIPTION!'
-    assert_redirected_to root_path
+    assert_redirected_to home_dashboard_path
   end
 
 
