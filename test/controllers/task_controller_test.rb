@@ -7,9 +7,11 @@ class TaskControllerTest < ActionDispatch::IntegrationTest
                                 description: ('a'*20),
                                 user_id: users(:user_one).id)
 
+    now = Time.now
+
     @task = Task.create(name: 'Task One', 
                         description: ('b'*50), 
-                        deadline: '2021-12-25',
+                        deadline: "#{now.year}-#{now.month}-#{now.day}",
                         user_id: users(:user_one).id,
                         category_id: @category.id)
 
@@ -206,7 +208,7 @@ class TaskControllerTest < ActionDispatch::IntegrationTest
   end
 
 
-  test "3.11 should be able to update deadline if not logged in" do
+  test "3.12 should be able to update deadline if not logged in" do
     sign_out :user
     patch tasks_update_path(id: @task.category_id, tid: @task.id), params: {
       task: { deadline: '2021-02-20' }
@@ -240,7 +242,7 @@ class TaskControllerTest < ActionDispatch::IntegrationTest
   end
 
 
-  test "4.2 should not be able to delete task if not the owner" do
+  test "4.3 should not be able to delete task if not the owner" do
     self.login_hacker
     old_tasks_count = Category.find(@category.id).tasks.length
 
@@ -283,13 +285,16 @@ class TaskControllerTest < ActionDispatch::IntegrationTest
   end
 
 
-  test "5.5 should show the task status pending" do
+  test "5.6 should show the task status pending" do
+    future = Time.now
+    @task.deadline = "#{future.year+1}-01-01"
+    @task.save
     get tasks_show_path(id: @task.category_id, tid: @task.id)
     assert_match 'Pending', response.body
   end
 
 
-  test "5.5 should show the task status completed" do
+  test "5.7 should show the task status completed" do
     @task.completed = true
     @task.save
     get tasks_show_path(id: @task.category_id, tid: @task.id)
@@ -297,7 +302,32 @@ class TaskControllerTest < ActionDispatch::IntegrationTest
   end
 
 
-  test "5.5 should show the task deadline" do
+  test "5.8 should show the task status Overdue" do
+    tasks(:task_overdue).category_id = @category.id
+    tasks(:task_overdue).user_id = users(:user_one).id
+    tasks(:task_overdue).save
+
+    get tasks_show_path(id: tasks(:task_overdue).category_id, tid: tasks(:task_overdue).id)
+    assert_match 'Overdue', response.body
+  end
+
+
+  test "5.9 should show the task status Due Today" do
+    now = Time.now
+
+    task = Task.create(name: 'Task One', 
+                        description: ('b'*50), 
+                        deadline: "#{now.year}-#{now.month}-#{now.day}",
+                        user_id: users(:user_one).id,
+                        category_id: @category.id);
+    
+
+    get tasks_show_path(id: task.category_id, tid: task.id)
+    assert_match 'Due Today', response.body
+  end
+
+
+  test "5.10 should show the task deadline" do
     # format should be based on date_full_words on application helpers
     get tasks_show_path(id: @task.category_id, tid: @task.id)
     assert_match @task.deadline.strftime("%A, %d %b %Y"), response.body

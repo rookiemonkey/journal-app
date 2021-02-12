@@ -21,9 +21,21 @@ class Task < ApplicationRecord
   # deadline is an instance of ActiveSupport::TimeWithZone
   # https://api.rubyonrails.org/v6.1.0/classes/ActiveSupport/TimeWithZone.html
   def deadline_not_past
-    return if deadline.nil?
-    return if deadline.today?
-    errors.add(:deadline, "is already past") if deadline.past?
+    return if (deadline.nil? or deadline.today?)
+
+    if self.new_record?
+      return errors.add(:deadline, "is already past") if deadline.past?
+    end
+
+    unless self.new_record?
+      old_deadline, new_deadline = self.deadline_change
+
+      return if old_deadline.nil?
+
+      return if ((new_deadline == old_deadline) and !new_deadline.past?)
+
+      return errors.add(:deadline, "is already past") if new_deadline.past?
+    end
   end
 
 end

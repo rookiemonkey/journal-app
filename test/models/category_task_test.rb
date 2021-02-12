@@ -7,11 +7,14 @@ class CategoryTaskTest < ActiveSupport::TestCase
                                 description: ('a'*20),
                                 user_id: users(:user_one).id)
 
+    now = Time.now
+
     @task = Task.create(name: "Task One", 
                         description: ("a"*50), 
-                        deadline: "2021-03-30", 
+                        deadline: "#{now.year}-#{now.month}-#{now.day}",
                         category_id: @category.id,
                         user_id: users(:user_one).id)
+
   end
 
   test "task should reject if not associated to any category" do
@@ -31,18 +34,22 @@ class CategoryTaskTest < ActiveSupport::TestCase
     self.destroy_nils(Category, 'name')
     task_two = Task.create(name: "Task Two")
     task_three = Task.create(name: "Task Three")
+    tasks(:task_overdue).user_id = users(:user_one).id
 
     @task.category_id = @category.id
     task_two.category_id = @category.id
     task_three.category_id = @category.id
+    tasks(:task_overdue).category_id = @category.id
 
     @task.save
     task_two.save
     task_three.save
+    tasks(:task_overdue).save
 
     @category.tasks << @task
     @category.tasks << task_two
     @category.tasks << task_three
+    @category.tasks << tasks(:task_overdue)
     @category.save
 
     @category.destroy
