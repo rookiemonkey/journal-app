@@ -1,14 +1,13 @@
 <section class="container container-content mt-6">
 <div class="columns">
 
-
   <% label = task_label(@task) %>
 
   <div class="column is-4 container-left-task">
 
     <%= image_tag :'create.task.svg'  %>
 
-    <h2 class="is-size-2 has-text-weight-medium">
+    <h2 class="is-size-2 has-text-weight-bold">
       <%= @task.name %>
     </h2>
 
@@ -28,6 +27,27 @@
   </div>
 
   <div class="column is-8 container-right-task">
+    <nav class="breadcrumb is-flex is-justify-content-flex-end" aria-label="breadcrumbs">
+      <ul>
+        <li>
+          <%= link_to tasks_path(@task.category_id), class: "has-text-light" do %>
+            <span class="icon is-small">
+              <i class="fas fa-book"></i>
+            </span>
+            <span><%= @category_name %></span>
+          <% end %>
+        </li>
+        <li>
+          <a href="#" class="has-text-light">
+            <span class="icon is-small">
+              <i class="fas fa-cogs"></i>
+            </span>
+            <span><%= @task.name %></span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
     <h2 class="is-size-4 has-text-weight-medium">Task Details</h2> <br/>
     <p class="is-size-5"><%= @task.description %></p>
   </div>

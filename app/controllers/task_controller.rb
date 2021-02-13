@@ -19,6 +19,7 @@ class TaskController < ApplicationController
   end
 
   def show
+    @category_name = @task.category.name
   end
   
   def create
