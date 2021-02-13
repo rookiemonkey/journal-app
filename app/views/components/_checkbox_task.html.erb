@@ -2,7 +2,9 @@
                   nil, 
                   task.completed, 
                   { data: { 
-                    reflex: 'click->TaskReflex#toggle_complete', 
-                    tid: task.id 
-                  } }) 
+                      reflex: 'click->TaskReflex#toggle_complete', 
+                      tid: task.id 
+                    },
+                    class: "checkbox"
+                  }) 
 %>
