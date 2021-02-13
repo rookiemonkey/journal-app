@@ -1,0 +1,30 @@
+<div class="modal" data-taskmodal-id="<%= task.id %>">
+  <div class="modal-background"></div>
+  <div class="modal-content has-background-light p-3 py-6">
+    <p class="has-text-centered has-text-black-bis mb-6">
+      Are you sure you want to delete "<b><%= task.name %></b>" ?
+    </p>
+    <div class="is-flex is-justify-content-center">
+
+      <button 
+        title="Delete Task" 
+        class="button is-danger has-text-light m-2"
+        data-controller="deletetask"
+        data-deletetask-target="task"
+        data-action="click->deletetask#delete_task"
+        data-tid="<%= task.id %>"
+      >
+        <i class="far fa-trash-alt mr-3"></i> Confirm
+      </button>
+
+      <button 
+        class="modal-cancel button is-warning m-2" 
+        data-taskcancelmodal-id="<%= task.id %>"
+      >
+        <i class="fas fa-undo-alt mr-3"></i> Cancel
+      </button>
+
+    </div>
+  </div>
+  <button class="modal-close is-large" data-taskclosemodal-id="<%= task.id %>" aria-label="close"></button>
+</div>
