@@ -42,20 +42,13 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     assert_select "a:match('href', ?)", categories_edit_path(@category)
   end
 
-
-  test "1.6 home should have a link to delete a category" do
-    get home_dashboard_path
-    assert_select "a:match('href', ?)", categories_delete_path(@category)
-  end
-
-
-  test "1.7 home should show the category name" do
+  test "1.6 home should show the category name" do
     get home_dashboard_path
     assert_match @category.name, response.body
   end
 
 
-  test "1.8 home should only show categories for the current user" do
+  test "1.7 home should only show categories for the current user" do
     self.generate_category('Ten')
     self.generate_category('Nine')
 
@@ -72,7 +65,7 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
   end
 
 
-  test "1.9 home should only show overdue/due today incomplete tasks for the current user" do
+  test "1.8 home should only show overdue/due today incomplete tasks for the current user" do
     self.generate_task('Ten')
     self.generate_task('Nine')
     now = Time.now
