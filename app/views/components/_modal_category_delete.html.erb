@@ -1,0 +1,30 @@
+<div class="modal" data-categorymodal-id="<%= category.id %>">
+  <div class="modal-background"></div>
+  <div class="modal-content has-background-light p-3 py-6">
+    <p class="has-text-centered has-text-black-bis mb-6">
+      Are you sure you want to delete "<b><%= category.name %></b>" and all the tasks associated to it?
+    </p>
+    <div class="is-flex is-justify-content-center">
+
+      <button 
+        title="Delete Category" 
+        class="button is-danger has-text-light m-2"
+        data-controller="deletecategory"
+        data-deletecategory-target="category"
+        data-action="click->deletecategory#delete_category"
+        data-id="<%= category.id %>"
+      >
+        <i class="far fa-trash-alt mr-3"></i> Confirm
+      </button>
+
+      <button 
+        class="modal-cancel button is-warning m-2" 
+        data-categorycancelmodal-id="<%= category.id %>"
+      >
+        <i class="fas fa-undo-alt mr-3"></i> Cancel
+      </button>
+
+    </div>
+  </div>
+  <button class="modal-close is-large" data-categoryclosemodal-id="<%= category.id %>" aria-label="close"></button>
+</div>
