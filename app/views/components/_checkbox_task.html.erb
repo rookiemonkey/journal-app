@@ -1,10 +1,13 @@
-<%= check_box_tag(nil, 
+<%= check_box_tag(
+                  nil, 
                   nil, 
                   task.completed, 
-                  { data: { 
+                  { 
+                    data: { 
                       reflex: 'click->TaskReflex#toggle_complete', 
                       tid: task.id 
                     },
                     class: "checkbox"
-                  }) 
+                  }
+                ) 
 %>
