@@ -13,6 +13,8 @@
 
   <body>
     <%= raw toastr_flash[0] if toastr_flash.length.positive?  %>
+    <%= render 'components/navigation' %>
     <%= yield %>
+    <%= render 'components/footer' %>
   </body>
 </html>
