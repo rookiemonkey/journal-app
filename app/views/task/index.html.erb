@@ -6,7 +6,7 @@
 
     <div class="task-progress-container is-flex">
       <div class="mr-3 progress-container">
-        <%= @count_completed %> / <%= @count_not_completed %> tasks are completed!
+        <%= @count_completed %> / <%= @tasks.length %> tasks are completed!
         <progress class="progress is-success journal-progress" value="<%= @count_completed %>" max="<%= @tasks.length %>"></progress>
       </div>
       <div>
