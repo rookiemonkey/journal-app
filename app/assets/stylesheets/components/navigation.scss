@@ -30,7 +30,8 @@ a.navbar-item {
   transition: background-color 250ms ease-in-out;
 }
 
-a.navbar-item:hover {
+a.navbar-item:hover,
+a.navbar-item:focus-within {
   background-color: darken($color: $orange-dark, $amount: 5) !important;
 }
 
