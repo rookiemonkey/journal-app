@@ -1,5 +1,11 @@
 <% route = "#{params[:controller]}##{params[:action]}" %>
 
+<% if route == 'task#show' %>
+  <button class="button is-light action-tile-button">
+    <%= render 'components/stimuli/checkbox_task', task: task %>
+  </button>
+<% end %>
+
 <button class="to_clipboard_task button is-light action-tile-button has-text-link" data-url="<%= tasks_show_path(id: task.category_id, tid: task.id) %>" title="Link Task">
   <i class="fas fa-link"></i>
 </button>
@@ -14,6 +20,4 @@
     <i class="fas fa-edit"></i>
 <% end %>
 
-<button class="button is-danger is-light has-text-danger action-tile-button" data-taskdelete-btn="<%= task.id %>" title="Delete Task">
-  <i class="far fa-trash-alt"></i>
-</button>
+<%= render 'components/stimuli/btn_task_delete', task: task %>

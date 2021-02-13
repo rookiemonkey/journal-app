@@ -34,9 +34,7 @@
           <i class="fas fa-edit"></i>
       <% end %>
 
-      <button class="button is-danger is-light has-text-danger action-tile-button" data-categorydelete-btn="<%= category.id %>" title="Delete Category">
-        <i class="far fa-trash-alt"></i>
-      </button>
+      <%= render 'components/stimuli/btn_category_delete', category: category %>
     </div>
 
 
