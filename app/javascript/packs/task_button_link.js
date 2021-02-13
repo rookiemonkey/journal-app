@@ -1,7 +1,7 @@
 
 const buttons = [...document.querySelectorAll('.to_clipboard_task')]
 
-for (let button of buttons) {
+for (const button of buttons) {
 
   button.onclick = () => {
     const { host, protocol } = window.location
