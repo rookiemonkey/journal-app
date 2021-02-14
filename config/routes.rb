@@ -1,15 +1,25 @@
 Rails.application.routes.draw do
 
-  devise_for :users, skip: [:sessions]
+  devise_for  :users, 
+              path: '/',
+              path_names: { 
+                            sign_in: 'signin', 
+                            sign_up: 'signup',
+                            sign_out: 'signout'
+                          },
+              controllers:{ 
+                            sessions: 'users/sessions',
+                            registrations: 'users/registrations'
+                          }
+
 
   devise_scope :user do
-    get '/signup',          to: 'devise/registrations#new',     as: 'signup_new'
-    get '/signin',          to: 'devise/sessions#new',          as: 'signin_new'
     post '/signin',         to: 'devise/sessions#create',       as: 'signin_create'
     post '/signup',         to: 'devise/registrations#create',  as: 'signup_create'
     delete '/signout',      to: 'devise/sessions#destroy',      as: 'signout'
   end
 
+  
   # HOME
   root                                          to: 'home#index'
   get     '/dashboard',                         to: 'home#dashboard',           as: 'home_dashboard'

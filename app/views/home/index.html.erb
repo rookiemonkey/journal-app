@@ -11,7 +11,7 @@
       Organize your thoughts.<br/> Satisfy your inner self. <br/> Enjoy accomplishing your tasks eveyday!
     </p>
     <p>
-      <%= (link_to 'Start Now!', signup_new_path, class: 'button is-info') unless current_user.present? %>
+      <%= (link_to 'Start Now!', new_user_registration_path, class: 'button is-info') unless current_user.present? %>
       <%= (link_to 'Start Now!', home_dashboard_path, class: 'button is-info') if current_user.present? %>
     </p>
   </div>

@@ -20,7 +20,7 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
   test "1.2 should be redirected when accessing home while not logged in" do
     sign_out :user
     get home_dashboard_path
-    assert_redirected_to signin_new_path
+    assert_redirected_to new_user_session_path
   end
 
 
@@ -111,7 +111,7 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
   test "2.2 should be redirected when accessing home_new_task_path while not logged in" do
     sign_out :user
     get home_new_task_path
-    assert_redirected_to signin_new_path
+    assert_redirected_to new_user_session_path
   end
 
 
@@ -146,7 +146,7 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
       }
     end
 
-    assert_redirected_to signin_new_path
+    assert_redirected_to new_user_session_path
   end
 
 

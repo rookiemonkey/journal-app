@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
 
   
   def redirect_if_not_loggedin
-    redirect_to(signin_new_path, { alert: 'Please sign in first' })  unless user_signed_in?
+    redirect_to(new_user_session_path, { alert: 'Please sign in first' })  unless user_signed_in?
   end
 
 

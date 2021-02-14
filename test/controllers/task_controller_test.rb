@@ -33,7 +33,7 @@ class TaskControllerTest < ActionDispatch::IntegrationTest
   test "1.2 should not get index if not logged in" do
     sign_out :user
     get tasks_path @category
-    assert_redirected_to signin_new_path
+    assert_redirected_to new_user_session_path
   end
 
 
@@ -62,7 +62,7 @@ class TaskControllerTest < ActionDispatch::IntegrationTest
   test "2.2 should not get new if not logged in" do
     sign_out :user
     get tasks_new_path(id: @category.id)
-    assert_redirected_to signin_new_path
+    assert_redirected_to new_user_session_path
   end
 
 
@@ -107,7 +107,7 @@ class TaskControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert Category.find(@category.id).tasks.length == old_tasks_count
-    assert_redirected_to signin_new_path
+    assert_redirected_to new_user_session_path
   end
 
 
@@ -123,7 +123,7 @@ class TaskControllerTest < ActionDispatch::IntegrationTest
   test "3.2 should not get edit if not logged in" do
     sign_out :user
     get tasks_edit_path(id: @task.category_id, tid: @task.id)
-    assert_redirected_to signin_new_path
+    assert_redirected_to new_user_session_path
   end
 
 
@@ -158,7 +158,7 @@ class TaskControllerTest < ActionDispatch::IntegrationTest
       task: { name: 'UPDATED TASK!' }
     }
     assert Task.find(@task.id).name != 'UPDATED TASK!'
-    assert_redirected_to signin_new_path
+    assert_redirected_to new_user_session_path
   end
 
 
@@ -190,7 +190,7 @@ class TaskControllerTest < ActionDispatch::IntegrationTest
       task: { description: 'UPDATED DESCRIPTION!' }
     }
     assert Task.find(@task.id).description != 'UPDATED DESCRIPTION!'
-    assert_redirected_to signin_new_path
+    assert_redirected_to new_user_session_path
   end
 
 
@@ -218,7 +218,7 @@ class TaskControllerTest < ActionDispatch::IntegrationTest
       task: { deadline: '2021-02-20' }
     }
     assert Task.find(@task.id).deadline != '2021-02-20'
-    assert_redirected_to signin_new_path
+    assert_redirected_to new_user_session_path
   end
 
 
@@ -242,7 +242,7 @@ class TaskControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert Category.find(@category.id).tasks.length == old_tasks_count
-    assert_redirected_to signin_new_path
+    assert_redirected_to new_user_session_path
   end
 
 

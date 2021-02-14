@@ -1,11 +1,11 @@
 <%- if controller_name != 'sessions' %>
-  <%= link_to signin_new_path, class: "button is-secondary" do %>
+  <%= link_to new_user_session_path, class: "button is-secondary" do %>
     <i class="fas fa-sign-in-alt mr-3"></i> Signin
   <% end %>
 <% end %>
 
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-  <%= link_to signup_new_path, class: "button is-secondary" do %>
+  <%= link_to new_user_registration_path, class: "button is-secondary" do %>
     <i class="fas fa-user-plus mr-3"></i> Signup
   <% end %>
 <% end %>

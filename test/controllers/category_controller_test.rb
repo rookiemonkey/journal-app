@@ -18,7 +18,7 @@ class CategoryControllerTest < ActionDispatch::IntegrationTest
   test "1.2 should not get new when not logged in" do
     sign_out :user
     get categories_new_path
-    assert_redirected_to signin_new_path
+    assert_redirected_to new_user_session_path
   end
 
 
@@ -31,7 +31,7 @@ class CategoryControllerTest < ActionDispatch::IntegrationTest
   test "2.2 should not get edit when not logged in" do
     sign_out :user
     get categories_edit_path @category
-    assert_redirected_to signin_new_path
+    assert_redirected_to new_user_session_path
   end
 
 
@@ -54,7 +54,7 @@ class CategoryControllerTest < ActionDispatch::IntegrationTest
     assert_no_difference('Category.count') do
       delete categories_delete_path @category
     end
-    assert_redirected_to signin_new_path
+    assert_redirected_to new_user_session_path
   end
 
 
@@ -89,7 +89,7 @@ class CategoryControllerTest < ActionDispatch::IntegrationTest
       } } 
     end
 
-    assert_redirected_to signin_new_path
+    assert_redirected_to new_user_session_path
   end
 
 
@@ -149,7 +149,7 @@ class CategoryControllerTest < ActionDispatch::IntegrationTest
     }
     
     assert Category.find(@category.id).description != 'UPDATED DESCRIPTION!'
-    assert_redirected_to signin_new_path
+    assert_redirected_to new_user_session_path
   end
 
 
@@ -161,7 +161,7 @@ class CategoryControllerTest < ActionDispatch::IntegrationTest
     }
     
     assert Category.find(@category.id).name != 'UPDATED CATEGORY!'
-    assert_redirected_to signin_new_path
+    assert_redirected_to new_user_session_path
   end
 
 
