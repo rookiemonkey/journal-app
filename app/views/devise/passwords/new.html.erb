@@ -1,0 +1,45 @@
+<section class="container container-content mt-6">
+<div class="columns">
+
+
+  <div class="column is-6 container-left">
+    <%= image_tag :'password_forgot.svg' %>
+  </div>
+
+
+  <div class="column is-6 container-right">
+  
+    <%= render 'components/form_errors', instance: resource %>
+
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+
+      <div class="field">
+      <div class="control"> 
+        <p class="has-text-weight-medium">
+          Please provide us the email you used upon signup. We'll be using that to send instructions on how to retrieve your account.
+        </p>
+      </div>
+      </div>
+
+      <div class="field">
+      <div class="control"> 
+        <%= f.label :email, class: "has-text-weight-bold" %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "off", class: "input" %>
+      </div>
+      </div>
+
+      <div class="field">
+      <div class="control"> 
+        <%= f.button class: 'button is-info' do %>
+          <i class="fas fa-paper-plane mr-3"></i> Request Password Reset
+        <% end %>
+      </div>
+      </div>
+
+    <% end %>
+
+  </div>
+
+
+</div>
+</section>
