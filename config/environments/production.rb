@@ -68,6 +68,8 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
 
+  config.action_mailer.default_url_options = { host: ENV.fetch('APP_URL') }
+
   config.action_mailer.smtp_settings = {
     from: 'user_care@satisfy.com',
     user_name: ENV.fetch('MAILTRAP_USERNAME'),
