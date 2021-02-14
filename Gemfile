@@ -61,3 +61,5 @@ gem "devise", "~> 4.7"
 gem "stimulus_reflex", "~> 3.4"
 
 gem "redis", "~> 4.2"
+
+gem "figaro", "~> 1.2"
