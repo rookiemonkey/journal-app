@@ -12,6 +12,16 @@
         <i class="far fa-calendar-alt mr-3"></i> <%= date_full_words Time.now %>
       </span>
 
+      <% if current_user.nil? %>
+        <%= link_to new_user_registration_path, class: "navbar-item has-text-light" do %>
+          <i class="fas fa-user-plus mr-3"></i> Signup
+        <% end %>
+
+        <%= link_to new_user_session_path, class: "navbar-item has-text-light" do %>
+          <i class="fas fa-sign-in-alt mr-3"></i> Signin
+        <% end %>
+      <% end %>
+
       <% unless current_user.nil? %>
         <%= link_to home_dashboard_path, class: "navbar-item has-text-light" do %>
           <i class="fas fa-clipboard-list mr-3"></i> Dashboard
