@@ -23,7 +23,7 @@ class TaskController < ApplicationController
   end
   
   def create
-    @task = Task.new(self.extract_params)
+    @task = Task.new(extract_params)
     @task.category_id = @category.id
     @task.user_id = current_user.id
     raise CreateTaskError unless @task.save
@@ -32,7 +32,7 @@ class TaskController < ApplicationController
   end
 
   def update
-    raise UpdateTaskError unless @task.update(self.extract_params)
+    raise UpdateTaskError unless @task.update(extract_params)
     redirect_to(tasks_path(@category.id), 
                 notice: "Successfully updated a task for #{@category.name}")
   end

@@ -10,7 +10,7 @@ class HomeController < ApplicationController
   end
 
   def create_task
-    @task = Task.create(self.extract_params_task)
+    @task = Task.create(extract_params_task)
     @task.user_id = current_user.id
     raise CreateJournalTaskError unless @task.save
     redirect_to(home_dashboard_path,  
