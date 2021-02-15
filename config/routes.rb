@@ -15,8 +15,8 @@ Rails.application.routes.draw do
 
 
   devise_scope :user do
-    post '/signin',         to: 'devise/sessions#create',       as: 'signin_create'
-    post '/signup',         to: 'devise/registrations#create',  as: 'signup_create'
+    post '/signin',         to: 'users/sessions#create',       as: 'signin_create'
+    post '/signup',         to: 'users/registrations#create',  as: 'signup_create'
     delete '/signout',      to: 'devise/sessions#destroy',      as: 'signout'
   end
 

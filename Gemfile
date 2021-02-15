@@ -63,3 +63,5 @@ gem "stimulus_reflex", "~> 3.4"
 gem "redis", "~> 4.2"
 
 gem "figaro", "~> 1.2"
+
+gem "pgcrypto", "~> 0.4.1"

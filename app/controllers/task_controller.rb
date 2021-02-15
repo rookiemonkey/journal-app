@@ -48,10 +48,10 @@ class TaskController < ApplicationController
 
   def set_category
     @category = Category.find params[:id]
-    raise ActiveRecord::RecordNotFound unless @category.id == params[:id].to_i
+    raise ActiveRecord::RecordNotFound unless @category.id == params[:id]
   end
 
-  def set_task
+  def set_task  
     @task = Task.find params[:tid]
   end
 

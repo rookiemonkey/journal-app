@@ -36,6 +36,7 @@ class CategoryController < ApplicationController
 
   def set_category
     @category = Category.find params[:id]
+    raise ActiveRecord::RecordNotFound unless @category.id == params[:id]
   end
 
   def extract_params
