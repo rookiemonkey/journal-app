@@ -2,13 +2,13 @@
 
 class TaskReflex < ApplicationReflex
 
-  def toggle_complete
+  def complete(tid)
     task = Task.find(element.dataset[:tid])
     task.update(completed: !task.completed)
   end
 
   def delete(tid)
-    task = Task.find(tid.to_i)
+    task = Task.find(tid)
     task.destroy
   end
   

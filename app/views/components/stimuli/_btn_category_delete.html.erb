@@ -1,4 +1,11 @@
 <button 
-  class="button is-danger is-light has-text-danger action-tile-button" data-categorydelete-btn="<%= category.id %>" 
-  title="Delete Category"
-><i class="far fa-trash-alt"></i></button>
+  title="Delete Category" 
+  class="button is-danger has-text-light m-2"
+  data-controller="deletecategory"
+  data-deletecategory-target="category"
+  data-action="click->deletecategory#delete_category"
+  data-id="<%= category.id %>"
+  data-name="<%= category.name %>"
+>
+  <i class="far fa-trash-alt mr-3"></i> Confirm
+</button>

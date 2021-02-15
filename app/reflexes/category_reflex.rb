@@ -3,7 +3,7 @@
 class CategoryReflex < ApplicationReflex
 
   def delete(id)
-    task = Category.find(id.to_i)
+    task = Category.find(id)
     task.destroy
   end
   

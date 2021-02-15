@@ -4,8 +4,11 @@
                   task.completed, 
                   { 
                     data: { 
-                      reflex: 'click->TaskReflex#toggle_complete', 
-                      tid: task.id 
+                      "controller": 'completetask',
+                      "completetask-target": 'task',
+                      "action": 'click->completetask#complete_task',
+                      "tid": task.id,
+                      "name": task.name
                     },
                     class: "checkbox"
                   }

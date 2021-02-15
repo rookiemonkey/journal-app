@@ -7,6 +7,10 @@ export default class extends ApplicationController {
     super.connect()
   }
 
+  reflexSuccess(element, reflex, noop, reflexId) {
+    this.flash('Hooray!', `Successfully deleted a category!`, 'success')
+  }
+
   delete_category() {
     this.stimulate('Category#delete', this.categoryTarget.dataset.id)
   }

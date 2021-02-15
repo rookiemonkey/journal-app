@@ -1,5 +1,11 @@
 <button 
-  class="button is-danger is-light has-text-danger action-tile-button" 
-  data-taskdelete-btn="<%= task.id %>" 
-  title="Delete Task"
-><i class="far fa-trash-alt"></i></button>
+  title="Delete Task" 
+  class="button is-danger has-text-light m-2"
+  data-controller="deletetask"
+  data-deletetask-target="task"
+  data-action="click->deletetask#delete_task"
+  data-tid="<%= task.id %>"
+  data-name="<%= task.name %>"
+>
+  <i class="far fa-trash-alt mr-3"></i> Confirm
+</button>

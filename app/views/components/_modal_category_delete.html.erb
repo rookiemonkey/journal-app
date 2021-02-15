@@ -6,16 +6,7 @@
     </p>
     <div class="is-flex is-justify-content-center">
 
-      <button 
-        title="Delete Category" 
-        class="button is-danger has-text-light m-2"
-        data-controller="deletecategory"
-        data-deletecategory-target="category"
-        data-action="click->deletecategory#delete_category"
-        data-id="<%= category.id %>"
-      >
-        <i class="far fa-trash-alt mr-3"></i> Confirm
-      </button>
+      <%= render '/components/stimuli/btn_category_delete', category: category %>
 
       <button 
         class="modal-cancel button is-warning m-2" 

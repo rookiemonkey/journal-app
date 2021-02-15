@@ -8,11 +8,11 @@ export default class extends ApplicationController {
   }
 
   reflexSuccess(element, reflex, noop, reflexId) {
-    this.flash('Hooray!', `Successfully deleted a task!`, 'success')
+    this.flash('Hooray!', `Successfully toggled a task's completed status!`, 'success')
   }
 
-  delete_task() {
-    this.stimulate('Task#delete', this.taskTarget.dataset.tid)
+  complete_task() {
+    this.stimulate('Task#complete', this.taskTarget.dataset.tid)
   }
 
 }
