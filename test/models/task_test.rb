@@ -10,7 +10,7 @@ class TaskTest < ActiveSupport::TestCase
     now = Time.now
 
     @task = Task.create(name: "Task One", 
-                        description: ("a"*50), 
+                        description: "<p>#{("a"*50)}</p>", 
                         deadline: "#{now.year}-#{now.month}-#{now.day}", 
                         category_id: @category.id,
                         user_id: users(:user_one).id)
@@ -61,7 +61,7 @@ class TaskTest < ActiveSupport::TestCase
     now = Time.now
 
     task = Task.create(name: "Task One", 
-                        description: ("a"*50), 
+                        description: "<p>#{("a"*50)}</p>", 
                         deadline: "#{now.year-1}-#{now.month}-#{now.day}", 
                         category_id: @category.id,
                         user_id: users(:user_one).id)

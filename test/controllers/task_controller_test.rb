@@ -10,7 +10,7 @@ class TaskControllerTest < ActionDispatch::IntegrationTest
     now = Time.now
 
     @task = Task.create(name: 'Task One', 
-                        description: ('b'*50), 
+                        description: "<p>#{('b'*50)}</p>", 
                         deadline: "#{now.year}-#{now.month}-#{now.day}",
                         user_id: users(:user_one).id,
                         category_id: @category.id)
@@ -88,7 +88,7 @@ class TaskControllerTest < ActionDispatch::IntegrationTest
 
     assert_difference('Task.count', 1) do
       post tasks_create_path(id: @category.id), params: {
-        task: { name: 'Task Two!', description: ("a"*50), deadline: "2021-12-26" }
+        task: { name: 'Task Two!', description: "<p>#{("a"*50)}</p>", deadline: "2021-12-26" }
       }
     end
 
@@ -102,7 +102,7 @@ class TaskControllerTest < ActionDispatch::IntegrationTest
 
     assert_no_difference('Task.count') do
       post tasks_create_path(id: @category.id), params: {
-        task: { name: 'Task Two!', description: ("a"*50), deadline: "2021-12-26" }
+        task: { name: 'Task Two!', description: "<p>#{("a"*50)}</p>", deadline: "2021-12-26" }
       }
     end
 
@@ -177,9 +177,11 @@ class TaskControllerTest < ActionDispatch::IntegrationTest
   test "3.8 should not be able to update task description if not the owner" do
     self.login_hacker
     patch tasks_update_path(id: @task.category_id, tid: @task.id), params: {
-      task: { description: 'UPDATED DESCRIPTION!' }
+      task: { description: '<p>UPDATED DESCRIPTION!</p>' }
     }
-    assert Task.find(@task.id).description != 'UPDATED DESCRIPTION!'
+    assert_not Task.find(@task.id).description.to_s == "<div class=\"trix-content\">\n" +
+                                                    "  <p>UPDATED DESCRIPTION!</p>\n" +
+                                                    "</div>\n"
     assert_redirected_to root_path
   end
 
@@ -187,9 +189,11 @@ class TaskControllerTest < ActionDispatch::IntegrationTest
   test "3.9 should not be able to update task description if not logged in" do
     sign_out :user
     patch tasks_update_path(id: @task.category_id, tid: @task.id), params: {
-      task: { description: 'UPDATED DESCRIPTION!' }
+      task: { description: '<p>UPDATED DESCRIPTION!</p>' }
     }
-    assert Task.find(@task.id).description != 'UPDATED DESCRIPTION!'
+    assert_not Task.find(@task.id).description.to_s == "<div class=\"trix-content\">\n" +
+                                                    "  <p>UPDATED DESCRIPTION!</p>\n" +
+                                                    "</div>\n"
     assert_redirected_to new_user_session_path
   end
 
@@ -320,7 +324,7 @@ class TaskControllerTest < ActionDispatch::IntegrationTest
     now = Time.now
 
     task = Task.create(name: 'Task One', 
-                        description: ('b'*50), 
+                        description: "<p>#{('b'*50)}</p>", 
                         deadline: "#{now.year}-#{now.month}-#{now.day}",
                         user_id: users(:user_one).id,
                         category_id: @category.id);

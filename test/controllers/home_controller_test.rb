@@ -11,46 +11,94 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
   end
 
 
-  test "1.1 should get home only if logged in" do
+  test "0.1 should get homepage" do
+    get root_path
+    assert_response :success
+  end
+
+
+  test "1.1 should get dashboard only if logged in" do
     get home_dashboard_path
     assert_response :success
   end
 
 
-  test "1.2 should be redirected when accessing home while not logged in" do
+  test "1.2 should be redirected when accessing dashboard while not logged in" do
     sign_out :user
     get home_dashboard_path
     assert_redirected_to new_user_session_path
   end
 
 
-  test "1.3 home should have both categories and tasks instance variables" do
+  test "1.3 dashboard should have both categories and tasks instance variables" do
     get home_dashboard_path
     assert_not_nil assigns(:categories)
     assert_not_nil assigns(:tasks)
   end
 
 
-  test "1.4 home should have a link to show category tasks" do
+  test "1.4 dashboard should have statistics of the users categories/tasks" do
+    get home_dashboard_path
+    assert_not_nil assigns(:statistics)
+  end
+
+
+  test "1.5 statistics should return total num of completed/uncompleted tasks for the whole account" do
+    self.setup_statistics
+    completed_tasks = Task.where(user_id: users(:user_one).id, completed: true)
+    incompleted_tasks = Task.where(user_id: users(:user_one).id, completed: false)
+
+    get home_dashboard_path
+    count = controller.instance_variable_get(:@statistics)[:count]
+
+    assert count.fetch(:completed) == completed_tasks.count
+    assert count.fetch(:not_completed) == incompleted_tasks.count
+  end
+
+  test "1.6 statistics should return total num of completed/uncompleted tasks per category/journal" do
+    self.setup_statistics
+    user_tasks = Task.where(user_id: users(:user_one).id)
+    user_categories = Category.where(user_id: users(:user_one).id)
+
+    get home_dashboard_path
+    categories = controller.instance_variable_get(:@statistics)[:categories]
+
+    categories.each do |key, hash_value|
+      category = Category.find key
+
+      num_of_completed_task = category.tasks.select { |t| t.completed }.length
+      num_of_incompleted_task = category.tasks.reject { |t| t.completed }.length
+
+      assert categories[key][:completed] == num_of_completed_task
+      assert categories[key][:not_completed] == num_of_incompleted_task
+    
+    end
+
+    assert categories.length == user_categories.length
+  end
+
+
+  test "1.7 dashboard should have a link to show category tasks" do
     get home_dashboard_path
     assert_select "a:match('href', ?)", tasks_path(@category)
   end
 
 
-  test "1.5 home should have a link to edit a category" do
+  test "1.8 dashboard should have a link to edit a category" do
     get home_dashboard_path
     assert_select "a:match('href', ?)", categories_edit_path(@category)
   end
 
-  test "1.6 home should show the category name" do
+
+  test "1.9 dashboard should show the category name" do
     get home_dashboard_path
     assert_match @category.name, response.body
   end
 
 
-  test "1.7 home should only show categories for the current user" do
-    self.generate_category('Ten')
-    self.generate_category('Nine')
+  test "1.10 dashboard should only show categories for the current user" do
+    self.generate_category('Ten', users(:user_two).id)
+    self.generate_category('Nine', users(:user_two).id)
 
     user_categories = Category.where(user_id: users(:user_one).id)
     all_categories = Category.all
@@ -65,9 +113,9 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
   end
 
 
-  test "1.8 home should only show overdue/due today incomplete tasks for the current user" do
-    self.generate_task('Ten')
-    self.generate_task('Nine')
+  test "1.11 dashboard should only show overdue/due today incomplete tasks for the current user" do
+    self.generate_task('Ten', users(:user_two).id)
+    self.generate_task('Nine', users(:user_two).id)
     now = Time.now
 
     tasks(:task_overdue).category_id = @category.id
@@ -75,13 +123,13 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     tasks(:task_overdue).save
 
     Task.create(name: 'Task One', 
-                      description: ('b'*50), 
+                      description: "<p>#{('b'*50)}</p>", 
                       deadline: "#{now.year}-#{now.month}-#{now.day}",
                       user_id: users(:user_one).id,
                       category_id: @category.id)
 
     task_today_two = Task.create(name: 'Task Two', 
-                      description: ('b'*50), 
+                      description: "<p>#{('b'*50)}</p>", 
                       deadline: "#{now.year}-#{now.month}-#{now.day}",
                       user_id: users(:user_one).id,
                       category_id: @category.id)
@@ -122,7 +170,7 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
       post home_create_task_path, params: {
         task: {
           name: 'Task Name',
-          description: 'Task Description',
+          description: '<p>Task Description</p>',
           deadline: '2025-02-20',
           category_id: @category.id
         }
@@ -139,7 +187,7 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
       post home_create_task_path, params: {
         task: {
           name: 'Task Name',
-          description: 'Task Description',
+          description: "<p>Task Description</p>",
           deadline: '2025-02-20',
           category_id: @category.id
         }
@@ -150,23 +198,53 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
   end
 
 
+
+
+
+
+
+
+
+
   private
   
-  def generate_category(name)
+  def generate_category(name, userid)
     Category.create(name: "Category #{name}", 
                     description: ('a'*20),
-                    user_id: users(:user_two).id)
+                    user_id: userid)
   end
 
-  def generate_task(name)
-    now = Time.now
-    category = self.generate_category(name)
 
-    task = Task.create(name: "Task #{name}", 
-                description: ('a'*20),
+  def generate_task(name, userid)
+    now = Time.now
+    category = self.generate_category(name, userid)
+
+    Task.create(name: "Task #{name}", 
+                description: "<p>#{('a'*20)}</p>",
                 deadline: "#{now.year}-#{now.month}-#{now.day}",
                 user_id: category.user_id,
                 category_id: category.id)
+  end
+
+
+  def setup_statistics
+    self.destroy_nils(Task, 'name')
+    self.destroy_nils(Category, 'name')
+    self.generate_task('for_another', users(:user_two).id)
+    self.generate_task('for_another', users(:user_two).id)
+    self.generate_task('for_another', users(:user_two).id)
+    self.generate_task('11', users(:user_one).id)
+    self.generate_task('10', users(:user_one).id)
+    self.generate_task('9', users(:user_one).id)
+    self.generate_task('8', users(:user_one).id)
+    self.generate_task('7', users(:user_one).id)
+    self.generate_task('6', users(:user_one).id)
+    self.generate_task('5', users(:user_one).id)
+    self.generate_task('4', users(:user_one).id)
+    self.generate_task('3', users(:user_one).id)
+    self.generate_task('2', users(:user_one).id)
+    task_one = self.generate_task('1', users(:user_one).id)
+    task_one.update(completed: true)
   end
 
 end
