@@ -1,6 +1,6 @@
 require "test_helper"
 
-class AccountFlowsTest < ActionDispatch::IntegrationTest
+class SignUpFlowsTest < ActionDispatch::IntegrationTest
 
   def setup
     @user = {
