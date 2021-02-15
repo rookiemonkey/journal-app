@@ -52,6 +52,7 @@ class TaskController < ApplicationController
   end
 
   def set_task  
+    raise nil if params[:tid] == 'favicon'
     @task = Task.find params[:tid]
   end
 
