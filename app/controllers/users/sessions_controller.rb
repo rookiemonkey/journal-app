@@ -2,7 +2,7 @@
 
 class Users::SessionsController < Devise::SessionsController
 
-  # override the redirection instead of root path
+  # override the redirection
   def create
     self.resource = warden.authenticate!(auth_options)
     set_flash_message!(:notice, :signed_in)

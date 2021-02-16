@@ -2,6 +2,7 @@
 
 class Users::PasswordsController < Devise::PasswordsController
 
+  # override the redirection and flash messages
   def create
     self.resource = resource_class.send_reset_password_instructions(resource_params)
     yield resource if block_given?
@@ -19,6 +20,7 @@ class Users::PasswordsController < Devise::PasswordsController
 
   private
 
+  # override the path
   def after_sending_reset_password_instructions_path_for(resource_name)
     new_session_path(resource_name) if is_navigational_format?
   end

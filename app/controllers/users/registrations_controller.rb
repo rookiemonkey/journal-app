@@ -2,6 +2,7 @@
 
 class Users::RegistrationsController < Devise::RegistrationsController
 
+  # override the redirection
   def create
     build_resource(sign_up_params)
 

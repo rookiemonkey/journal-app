@@ -4,7 +4,7 @@ class SignInFlowsTest < ActionDispatch::IntegrationTest
 
   def setup # user_one fixture details
     @user = {
-      email: "user1@google.com",
+      email: users(:user_one).email,
       password: "987654321"
     }
   end
