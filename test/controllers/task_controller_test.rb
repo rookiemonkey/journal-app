@@ -88,7 +88,7 @@ class TaskControllerTest < ActionDispatch::IntegrationTest
 
     assert_difference('Task.count', 1) do
       post tasks_create_path(id: @category.id), params: {
-        task: { name: 'Task Two!', description: "<p>#{("a"*50)}</p>", deadline: "2021-12-26" }
+        task: { name: 'Task Two!', description: "<p>#{("a"*50)}</p>", deadline: "2099-12-26" }
       }
     end
 
@@ -102,7 +102,7 @@ class TaskControllerTest < ActionDispatch::IntegrationTest
 
     assert_no_difference('Task.count') do
       post tasks_create_path(id: @category.id), params: {
-        task: { name: 'Task Two!', description: "<p>#{("a"*50)}</p>", deadline: "2021-12-26" }
+        task: { name: 'Task Two!', description: "<p>#{("a"*50)}</p>", deadline: "2099-12-26" }
       }
     end
 
@@ -200,18 +200,18 @@ class TaskControllerTest < ActionDispatch::IntegrationTest
 
   test "3.10 should be able to update deadline" do
     patch tasks_update_path(id: @task.category_id, tid: @task.id), params: {
-      task: { deadline: '2021-02-20' }
+      task: { deadline: '2099-02-20' }
     }
-    assert Task.find(@task.id).deadline == '2021-02-20'
+    assert Task.find(@task.id).deadline == '2099-02-20'
   end
 
 
   test "3.11 should be able to update deadline if not the owner" do
-     self.login_hacker
+    self.login_hacker
     patch tasks_update_path(id: @task.category_id, tid: @task.id), params: {
-      task: { deadline: '2021-02-20' }
+      task: { deadline: '2099-02-20' }
     }
-    assert Task.find(@task.id).deadline != '2021-02-20'
+    assert Task.find(@task.id).deadline != '2099-02-20'
     assert_redirected_to root_path
   end
 
@@ -219,9 +219,9 @@ class TaskControllerTest < ActionDispatch::IntegrationTest
   test "3.12 should be able to update deadline if not logged in" do
     sign_out :user
     patch tasks_update_path(id: @task.category_id, tid: @task.id), params: {
-      task: { deadline: '2021-02-20' }
+      task: { deadline: '2099-02-20' }
     }
-    assert Task.find(@task.id).deadline != '2021-02-20'
+    assert Task.find(@task.id).deadline != '2099-02-20'
     assert_redirected_to new_user_session_path
   end
 
