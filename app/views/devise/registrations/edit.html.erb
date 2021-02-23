@@ -1,43 +1,120 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<section class="container container-content mt-6">
+<div class="columns">
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "off" %>
+  <div class="column is-6 container-left">
+    <%= image_tag :'account.update.svg'  %>
   </div>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
+  <div class="column is-6 container-right">
 
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
+    <%= render 'components/form_errors', instance: resource %>
+
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+
+    <div class="field">
+    <div class="control"> 
+      <%= f.label :'First Name', class: "has-text-weight-bold" %><br />
+      <%= f.text_field :first_name, class: "input", autofocus: true, autocomplete: "off" %>
+    </div>
+    </div>
+
+    <div class="field">
+    <div class="control">
+      <%= f.label :'Last Name', class: "has-text-weight-bold" %><br />
+      <%= f.text_field :last_name, class: "input", autofocus: true, autocomplete: "off" %>
+    </div>
+    </div>
+
+    <div class="field">
+    <div class="control"> 
+      <%= f.label :email %><br />
+      <%= f.email_field :email, autofocus: true, class:"input", autocomplete: "off" %>
+    </div>
+    </div>
+
+    <div class="field">
+    <div class="control"> 
+      <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+      <%= f.password_field :password, class:"input", autocomplete: "off" %>
+      <% if @minimum_password_length %>
+        <br />
+        <em><%= @minimum_password_length %> characters minimum</em>
+      <% end %>
+    </div>
+    </div>
+
+    <div class="field">
+    <div class="control"> 
+      <%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation, class:"input", autocomplete: "off" %>
+    </div>
+    </div>
+
+    <div class="field mt-6">
+    <div class="control"> 
+      <%= f.label :current_password %> <i>(to confirm changes)</i><br />
+      <%= f.password_field :current_password, class:"input", autocomplete: "off" %>
+    </div>
+    </div>
+
+    <div class="field">
+    <div class="control"> 
+      <%= f.button class: "button is-info" do %>
+        <i class="fas fa-paper-plane mr-3"></i> Update
+      <% end %>
+    </div>
+    </div>
+
+    <div class="field mt-6">
+    <div class="control"> 
+      <button class="button is-info" id="btn_account_delete_open" type="button" style="background-color: transparent">
+        <i class="fas fa-user-alt-slash mr-3"></i> Delete Account
+      </button>
+    </div>
+    </div>
+
     <% end %>
+
   </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+</div>
+</section>
+
+
+<%# Modal for account deletion confirmation %>
+<div class="modal" data-modal="account_delete">
+  <div class="modal-background"></div>
+  <div class="modal-content has-background-light p-3 py-6">
+    <p class="has-text-centered has-text-black-bis mb-6">
+      Are you sure you want to delete your account?
+    </p>
+    <div class="is-flex is-justify-content-center">
+
+      <%= button_to registration_path(resource_name), method: :delete, class: "button is-danger has-text-light m-2" do %>
+        <i class="fas fa-user-alt-slash mr-3"></i> Confirm
+      <% end %>
+
+      <button 
+        class="modal-cancel button is-warning m-2" 
+        id="btn_account_delete_close_two"
+      >
+        <i class="fas fa-undo-alt mr-3"></i> Cancel
+      </button>
+
+    </div>
   </div>
+  <button class="modal-close is-large" id="btn_account_delete_close_one" aria-label="close"></button>
+</div>
 
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "off" %>
-  </div>
 
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
+<%# Modal js for opening/closing modal %>
+<script>
+  const modal = document.querySelector("[data-modal='account_delete']")
+  const btn_open = document.getElementById('btn_account_delete_open')
+  const btn_close_one = document.getElementById('btn_account_delete_close_one')
+  const btn_close_two = document.getElementById('btn_account_delete_close_two')
 
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
+  btn_open.onclick = () => modal.classList.add('is-active')
+  btn_close_one.onclick = () => modal.classList.remove('is-active')
+  btn_close_two.onclick = () => modal.classList.remove('is-active')
+</script>
