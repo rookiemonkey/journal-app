@@ -164,3 +164,32 @@ div.field div.control input:focus {
 .checkbox {
   zoom: 1.5;
 }
+
+@media only screen and (max-width: 768px) {
+
+  #home-index>.columns,
+  #sessions-new>.columns,
+  #registrations-new>.columns {
+    width: 100%;
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+
+  #home-index-left,
+  #sessions-new-left,
+  #registrations-new-left {
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  #sessions-new-right,
+  #registrations-new-left {
+    padding: $spacing-lg;
+  }
+
+  #home-index-right {
+    padding: $spacing-lg+$spacing-lg+$spacing-lg
+  }
+}

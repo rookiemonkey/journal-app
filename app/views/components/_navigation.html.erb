@@ -1,9 +1,15 @@
 <nav class="navbar">
 <div class="container">
 
-    <div class="navbar-brand is-flex is-align-content-center">
+    <div class="navbar-brand is-flex is-align-items-center">
         <%= image_tag asset_path('brand.svg'), class: "navbar-item title-icon" %>
         <%= link_to 'Satisfy', root_path, class: "navbar-item title-text has-text-primary-light has-text-weight-bold is-size-3" %>
+
+        <a role="button" id="navbarBurger" class="navbar-burger has-text-light" aria-label="menu" aria-expanded="false">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
     </div>
 
     <div id="navbarMenu" class="navbar-menu">
@@ -63,3 +69,10 @@
     
 </div>
 </nav>
+
+<script>
+  document.querySelector('#navbarBurger').onclick = () => {
+    document.querySelector('#navbarBurger').classList.toggle('is-active')
+    document.querySelector('#navbarMenu').classList.toggle('is-active')
+  }
+</script>

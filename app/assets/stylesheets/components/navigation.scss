@@ -55,3 +55,18 @@ div.dropdown div.dropdown-trigger button {
   box-shadow: 0 10px 16px rgba(0, 0, 0, .4),
     0 6px 6px rgba(0, 0, 0, .38);
 }
+
+.navbar-menu.is-active {
+  .navbar-end {
+
+    span, a {
+      color: black !important;
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  nav.navbar {
+    padding: $spacing-lg;
+  }
+}
