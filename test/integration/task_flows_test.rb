@@ -271,7 +271,7 @@ class TaskFlowsTest < ActionDispatch::IntegrationTest
 
 
   test "2.9 TASK. should be able to update a task on nested route" do
-    now = Time.now
+    now = Time.now.getlocal('+08:00')
     task = self.save_task
 
     @task[:name] = 'Updated Name!'
@@ -289,7 +289,7 @@ class TaskFlowsTest < ActionDispatch::IntegrationTest
 
     task_on_db = Task.find task.id
     assert task_on_db.name == 'Updated Name!'
-    assert task_on_db.deadline == "#{now.year}-#{now.month}-#{now.day}"
+    assert task_on_db.deadline == Time.zone.parse(@task[:deadline])
     assert task_on_db.description.to_s == "<div class=\"trix-content\">\n" +
                                           "  <p>Updated Description</p>\n" +
                                           "</div>\n"
@@ -388,7 +388,7 @@ class TaskFlowsTest < ActionDispatch::IntegrationTest
     task = self.save_task
 
     now = Time.now
-    @task[:deadline] = "#{now.year}-#{now.month}-#{now.day+1}"
+    @task[:deadline] = "2099-05-05"
     get tasks_edit_path(id: task.category_id, tid: task.id)
     assert_response :success
 
@@ -396,7 +396,7 @@ class TaskFlowsTest < ActionDispatch::IntegrationTest
 
     follow_redirect!
     task_on_db = Task.find task.id
-    assert task_on_db.deadline == "#{now.year}-#{now.month}-#{now.day+1}"
+    assert task_on_db.deadline == "Tue, 05 May 2099 00:00:00.000000000 +08 +08:00"
     assert_match "Successfully updated a task", response.body
   end
   

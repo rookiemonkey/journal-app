@@ -202,7 +202,7 @@ class TaskControllerTest < ActionDispatch::IntegrationTest
     patch tasks_update_path(id: @task.category_id, tid: @task.id), params: {
       task: { deadline: '2099-02-20' }
     }
-    assert Task.find(@task.id).deadline == '2099-02-20'
+    assert Task.find(@task.id).deadline == 'Fri, 20 Feb 2099 00:00:00.000000000 +08 +08:00'
   end
 
 
