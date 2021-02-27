@@ -243,3 +243,42 @@ div.field div.control input:focus {
     padding: $spacing-lg+$spacing-lg;
   }
 }
+
+@media only screen and (max-width: 414px) {
+  .tile-container {
+    grid-template-columns: 1fr;
+  }
+
+  #sessions-new-right,
+  #registrations-new-right,
+  #passwords-new-right,
+  #passwords-edit-right,
+  #registrations-edit-right,
+  #category-edit-right,
+  #category-new-right,
+  #home-new_task-right,
+  #task-edit-right,
+  #task-new-right {
+    padding: $spacing-sm;
+  }
+
+  #home-dashboard-top-statistics,
+  #task-index-top-statistics {
+    flex-direction: column
+  }
+
+  #home-dashboard-top-statistics>div,
+  #task-index-top-statistics>div,
+  #task-index-top-statistics>div>div:nth-child(2)>a {
+    width: 100%
+  }
+
+  #task-index-top-statistics>div {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #task-index-top-statistics>div>div:nth-child(2)>a {
+    margin-top: $spacing-sm;
+  }
+}
