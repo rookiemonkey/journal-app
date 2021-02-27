@@ -56,6 +56,10 @@ div.dropdown div.dropdown-trigger button {
     0 6px 6px rgba(0, 0, 0, .38);
 }
 
+.dropdown_account_mobile {
+  display: none !important;
+}
+
 .navbar-menu.is-active {
   .navbar-end {
 
@@ -68,5 +72,13 @@ div.dropdown div.dropdown-trigger button {
 @media only screen and (max-width: 768px) {
   nav.navbar {
     padding: $spacing-lg;
+  }
+
+  #dropdown_account {
+    display: none;
+  }
+
+  .dropdown_account_mobile {
+    display: block !important;
   }
 }
