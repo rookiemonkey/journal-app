@@ -1,9 +1,9 @@
-<section class="container container-content mt-6">
+<section id="task-show" class="container container-content mt-6">
 <div class="columns">
 
   <% label = task_label(@task) %>
 
-  <div class="column is-4 container-left-task">
+  <div id="task-show-left" class="column is-4 container-left-task">
 
     <%= image_tag :'create.task.svg'  %>
 
@@ -26,7 +26,7 @@
     </div>
   </div>
 
-  <div class="column is-8 container-right-task">
+  <div id="task-show-right" class="column is-8 container-right-task">
     <nav class="breadcrumb is-flex is-justify-content-flex-end" aria-label="breadcrumbs">
       <ul>
         <li>

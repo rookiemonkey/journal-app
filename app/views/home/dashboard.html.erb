@@ -2,7 +2,7 @@
 <% count_not_completed = count[:completed] + count[:not_completed] %>
 <% count_categories = @statistics[:categories] %>
 
-<section class="container container-content mt-3">
+<section id="home-dashboard-top" class="container container-content mt-3">
 
   <div class="box has-background-info-dark has-text-white has-text-weight-semibold is-flex is-align-items-center is-justify-content-space-between">
     <div class="is-size-4">
@@ -38,7 +38,7 @@
 
 </section>
 
-<section class="container mt-6">
+<section id="home-dashboard-bottom" class="container mt-6">
 
   <% if @tasks.length.positive? %>
     <div class="box has-background-warning-light has-text-dark is-size-4 has-text-weight-semibold">

@@ -1,4 +1,4 @@
-<section class="container mt-3">
+<section id="task-index-top" class="container mt-3">
   <div class="box is-flex is-justify-content-space-between is-align-content-center ">
     <h2 class="has-text-black-bis is-size-4 has-text-weight-semibold"><%= @category.name %></h2>
 
@@ -16,7 +16,7 @@
   </div>
 </section>
 
-<section class="container container-content mt-4">
+<section id="task-index-bottom" class="container container-content mt-4">
 
   <% if @tasks.length.positive? %>
     <div class="tile tile-container is-ancestor">

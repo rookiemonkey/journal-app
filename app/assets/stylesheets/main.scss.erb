@@ -167,38 +167,79 @@ div.field div.control input:focus {
 
 @media only screen and (max-width: 768px) {
 
+  .tile-container {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .is-parent>article.is-child {
+    height: 100%
+  }
+
+  #home-dashboard-top,
+  #home-dashboard-bottom,
+  #task-index-top,
+  #task-index-bottom {
+    padding-left: $spacing-lg;
+    padding-right: $spacing-lg;
+  }
+
+
   #home-index>.columns,
   #sessions-new>.columns,
   #registrations-new>.columns,
   #passwords-new>.columns,
   #passwords-edit>.columns,
-  #registrations-edit>.columns {
+  #registrations-edit>.columns,
+  #category-edit>.columns,
+  #category-new>.columns,
+  #home-new_task>.columns,
+  #task-edit>.columns,
+  #task-new>.columns,
+  #task-show>.columns {
     width: 100%;
     margin-left: 0px;
     margin-right: 0px;
   }
+
 
   #home-index-left,
   #sessions-new-left,
   #registrations-new-left,
   #passwords-new-left,
   #passwords-edit-left,
-  #registrations-edit-left {
+  #registrations-edit-left,
+  #category-edit-left,
+  #category-new-left,
+  #home-new_task-left,
+  #task-edit-left,
+  #task-new-left {
     margin-left: 0px;
     margin-right: 0px;
     padding-left: 0px;
     padding-right: 0px;
   }
 
+
   #sessions-new-right,
   #registrations-new-right,
   #passwords-new-right,
   #passwords-edit-right,
-  #registrations-edit-right {
+  #registrations-edit-right,
+  #category-edit-right,
+  #category-new-right,
+  #home-new_task-right,
+  #task-edit-right,
+  #task-new-right {
     padding: $spacing-lg;
   }
 
+
   #home-index-right {
     padding: $spacing-lg+$spacing-lg+$spacing-lg
+  }
+
+  #task-show-left,
+  #task-show-right {
+    padding: $spacing-lg+$spacing-lg;
   }
 }
