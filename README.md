@@ -1,4 +1,4 @@
-# Satisfy (Jounrnal App) 
+# Satisfy (Journal App) 
 
 An application that lets your categorize your tasks and reminds you of overdue tasks and tasks needed to be accomplished within the day
 
